@@ -20,7 +20,7 @@ namespace Prot_Sistemas
         {
             InitializeComponent();
             this.KeyPreview = true;
-            polarization_calc();
+            polarization_calc();            
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -29,7 +29,43 @@ namespace Prot_Sistemas
                 polarization_calc();
             }
         }
-        
+
+        private void chart1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            var chart = (Chart)sender;
+            var xAxis = chart.ChartAreas[0].AxisX;
+            var yAxis = chart.ChartAreas[0].AxisY;
+            try
+            {
+                if (chart1.ChartAreas[0].AxisX.Maximum <= 60)
+                {
+                    chart1.ChartAreas[0].AxisX.Interval = 10;
+                    chart1.ChartAreas[0].AxisY.Interval = 10;
+                }
+                if (chart1.ChartAreas[0].AxisX.Maximum > 61)
+                {
+                    chart1.ChartAreas[0].AxisX.Interval = 20;
+                    chart1.ChartAreas[0].AxisY.Interval = 20;
+                }
+                if (e.Delta < 0) // Scrolled down.
+                {
+                    chart1.ChartAreas[0].AxisX.Maximum = chart1.ChartAreas[0].AxisX.Maximum - 10;
+                    chart1.ChartAreas[0].AxisX.Minimum = chart1.ChartAreas[0].AxisX.Minimum + 10;
+                    chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY.Maximum - 10;
+                    chart1.ChartAreas[0].AxisY.Minimum = chart1.ChartAreas[0].AxisY.Minimum + 10;
+                    
+                }
+                else if (e.Delta > 0) // Scrolled up.
+                {
+                    chart1.ChartAreas[0].AxisX.Maximum = chart1.ChartAreas[0].AxisX.Maximum + 10;
+                    chart1.ChartAreas[0].AxisX.Minimum = chart1.ChartAreas[0].AxisX.Minimum - 10;
+                    chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY.Maximum + 10;
+                    chart1.ChartAreas[0].AxisY.Minimum = chart1.ChartAreas[0].AxisY.Minimum - 10;
+                }
+            }
+            catch { }
+        }
+
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && (e.KeyChar != ','))
@@ -77,19 +113,19 @@ namespace Prot_Sistemas
             Ic = new Complex(Convert.ToDouble(textBox12.Text) * Math.Cos(Convert.ToDouble(textBox13.Text) * Math.PI / 180), Convert.ToDouble(textBox12.Text) * Math.Sin(Convert.ToDouble(textBox13.Text) * Math.PI / 180));
             In = Ia + Ib + Ic;
             label19.Text = "" + Math.Round(k0.Real,3)+"+i"+Math.Round(k0.Imaginary,3);
-            
+                                  
             // AG
             Complex IaG = Ia + (k0 * In);
             Complex Sop_AG = (Zr * IaG) - Va;
             Complex Spol_AG = Va;
             Complex[] Zm =  { 0,Va / IaG};
-            chart1.Series[1].Points.AddXY(0, 0);
-            chart1.Series[1].Points.AddXY(Zm[1].Real, Zm[1].Imaginary);
+            chart1.Series["Zm_AG"].Points.AddXY(0, 0);
+            chart1.Series["Zm_AG"].Points.AddXY(Zm[1].Real, Zm[1].Imaginary);
             Complex[] Sop = { Zm[1], (Zm[1] + (Sop_AG / IaG)) };
-            chart1.Series[2].Points.AddXY(Sop[0].Real, Sop[0].Imaginary);
-            chart1.Series[2].Points.AddXY(Sop[1].Real, Sop[1].Imaginary);
-            chart1.Series[3].Points.AddXY(0, 0);
-            chart1.Series[3].Points.AddXY(LT_Z1.Real, LT_Z1.Imaginary);
+            chart1.Series["Zpol_AG"].Points.AddXY(Sop[0].Real, Sop[0].Imaginary);
+            chart1.Series["Zpol_AG"].Points.AddXY(Sop[1].Real, Sop[1].Imaginary);
+            chart1.Series["LT"].Points.AddXY(0, 0);
+            chart1.Series["LT"].Points.AddXY(LT_Z1.Real, LT_Z1.Imaginary);
             double radius = Complex.Abs(Zr) / 2;
             for (int k = 0; k <= 1000; k++)
             {
@@ -99,5 +135,51 @@ namespace Prot_Sistemas
             }
 
         }
+        void loops_fault()
+        {
+            //AB
+            if (radioButton1.Checked == true)
+            {
+
+            }
+            //BC
+            if (radioButton2.Checked == true)
+            {
+
+            }
+            //CA
+            if (radioButton3.Checked == true)
+            {
+
+            }
+            //AG
+            if (radioButton4.Checked == true)
+            {
+                chart1.Series["Zpol_AG"].Enabled = true;
+                chart1.Series["Zm_AG"].Enabled = true;
+            }
+            else
+            {
+                chart1.Series["Zpol_AG"].Enabled = false;
+                chart1.Series["Zm_AG"].Enabled = false;
+            }
+            //BG
+            if (radioButton5.Checked == true)
+            {
+
+            }
+            //CG
+            if (radioButton6.Checked == true)
+            {
+
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            loops_fault();
+        }
+
+       
     }
 }
