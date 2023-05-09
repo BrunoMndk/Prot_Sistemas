@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Numerics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using System.Xml.Linq;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Prot_Sistemas
 {
@@ -18,9 +19,17 @@ namespace Prot_Sistemas
         public Form1()
         {
             InitializeComponent();
+            this.KeyPreview = true;
             polarization_calc();
         }
-
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                polarization_calc();
+            }
+        }
+        
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && (e.KeyChar != ','))
@@ -47,6 +56,11 @@ namespace Prot_Sistemas
         Complex In = 0;
         void polarization_calc()
         {
+            chart1.Series[0].Points.Clear();
+            chart1.Series[1].Points.Clear();
+            chart1.Series[2].Points.Clear();
+            chart1.Series[3].Points.Clear();
+
             double ang_LT1 = Convert.ToDouble(Im_seq_pos_TB.Text);
             double ang_LT0 = Convert.ToDouble(Im_seq_neg_TB.Text);
             ang_LT1 = ang_LT1 * Math.PI / 180;
@@ -64,7 +78,7 @@ namespace Prot_Sistemas
             In = Ia + Ib + Ic;
             label19.Text = "" + Math.Round(k0.Real,3)+"+i"+Math.Round(k0.Imaginary,3);
             
-
+            // AG
             Complex IaG = Ia + (k0 * In);
             Complex Sop_AG = (Zr * IaG) - Va;
             Complex Spol_AG = Va;
