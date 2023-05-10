@@ -35,6 +35,16 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -224,10 +234,80 @@
             series4.Color = System.Drawing.Color.Fuchsia;
             series4.Legend = "Legend1";
             series4.Name = "Zpol_AG";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Color = System.Drawing.Color.DarkOrange;
+            series5.Enabled = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Zm_BG";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Color = System.Drawing.Color.Fuchsia;
+            series6.Enabled = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Zpol_BG";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Color = System.Drawing.Color.DarkOrange;
+            series7.Enabled = false;
+            series7.Legend = "Legend1";
+            series7.Name = "Zm_CG";
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = System.Drawing.Color.Fuchsia;
+            series8.Enabled = false;
+            series8.Legend = "Legend1";
+            series8.Name = "Zpol_CG";
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Color = System.Drawing.Color.DarkOrange;
+            series9.Enabled = false;
+            series9.Legend = "Legend1";
+            series9.Name = "Zm_AB";
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series10.Color = System.Drawing.Color.Fuchsia;
+            series10.Enabled = false;
+            series10.Legend = "Legend1";
+            series10.Name = "Zpol_AB";
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series11.Color = System.Drawing.Color.DarkOrange;
+            series11.Enabled = false;
+            series11.Legend = "Legend1";
+            series11.Name = "Zm_BC";
+            series12.ChartArea = "ChartArea1";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series12.Color = System.Drawing.Color.Fuchsia;
+            series12.Enabled = false;
+            series12.Legend = "Legend1";
+            series12.Name = "Zpol_BC";
+            series13.ChartArea = "ChartArea1";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series13.Color = System.Drawing.Color.DarkOrange;
+            series13.Enabled = false;
+            series13.Legend = "Legend1";
+            series13.Name = "Zm_CA";
+            series14.ChartArea = "ChartArea1";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.Color = System.Drawing.Color.Fuchsia;
+            series14.Enabled = false;
+            series14.Legend = "Legend1";
+            series14.Name = "Zpol_CA";
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Series.Add(series3);
             this.chart1.Series.Add(series4);
+            this.chart1.Series.Add(series5);
+            this.chart1.Series.Add(series6);
+            this.chart1.Series.Add(series7);
+            this.chart1.Series.Add(series8);
+            this.chart1.Series.Add(series9);
+            this.chart1.Series.Add(series10);
+            this.chart1.Series.Add(series11);
+            this.chart1.Series.Add(series12);
+            this.chart1.Series.Add(series13);
+            this.chart1.Series.Add(series14);
             this.chart1.Size = new System.Drawing.Size(484, 402);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -306,7 +386,7 @@
             this.textBox18.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox18.Name = "textBox18";
             this.textBox18.Size = new System.Drawing.Size(51, 15);
-            this.textBox18.TabIndex = 0;
+            this.textBox18.TabIndex = 21;
             this.textBox18.Text = "38,5645";
             this.textBox18.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -318,7 +398,7 @@
             this.textBox16.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(51, 15);
-            this.textBox16.TabIndex = 0;
+            this.textBox16.TabIndex = 19;
             this.textBox16.Text = "38,5645";
             this.textBox16.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -330,7 +410,7 @@
             this.textBox14.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(51, 15);
-            this.textBox14.TabIndex = 0;
+            this.textBox14.TabIndex = 17;
             this.textBox14.Text = "38,5645";
             this.textBox14.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -342,7 +422,7 @@
             this.textBox19.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox19.Name = "textBox19";
             this.textBox19.Size = new System.Drawing.Size(51, 15);
-            this.textBox19.TabIndex = 0;
+            this.textBox19.TabIndex = 22;
             this.textBox19.Text = "-36.2";
             this.textBox19.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -354,7 +434,7 @@
             this.textBox17.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(51, 15);
-            this.textBox17.TabIndex = 0;
+            this.textBox17.TabIndex = 20;
             this.textBox17.Text = "-36.2";
             this.textBox17.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -366,7 +446,7 @@
             this.textBox15.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(51, 15);
-            this.textBox15.TabIndex = 0;
+            this.textBox15.TabIndex = 18;
             this.textBox15.Text = "-36.2";
             this.textBox15.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -432,7 +512,7 @@
             this.radioButton6.Location = new System.Drawing.Point(186, 150);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(47, 20);
-            this.radioButton6.TabIndex = 2;
+            this.radioButton6.TabIndex = 1000;
             this.radioButton6.Text = "CG";
             this.radioButton6.UseVisualStyleBackColor = true;
             this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -443,7 +523,7 @@
             this.radioButton5.Location = new System.Drawing.Point(186, 124);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(47, 20);
-            this.radioButton5.TabIndex = 2;
+            this.radioButton5.TabIndex = 1000;
             this.radioButton5.Text = "BG";
             this.radioButton5.UseVisualStyleBackColor = true;
             this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -455,8 +535,7 @@
             this.radioButton4.Location = new System.Drawing.Point(186, 98);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(47, 20);
-            this.radioButton4.TabIndex = 2;
-            this.radioButton4.TabStop = true;
+            this.radioButton4.TabIndex = 1000;
             this.radioButton4.Text = "AG";
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -467,7 +546,7 @@
             this.radioButton3.Location = new System.Drawing.Point(186, 72);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(46, 20);
-            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabIndex = 1000;
             this.radioButton3.Text = "CA";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -478,7 +557,7 @@
             this.radioButton2.Location = new System.Drawing.Point(186, 46);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(46, 20);
-            this.radioButton2.TabIndex = 2;
+            this.radioButton2.TabIndex = 1000;
             this.radioButton2.Text = "BC";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -489,7 +568,7 @@
             this.radioButton1.Location = new System.Drawing.Point(186, 20);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(46, 20);
-            this.radioButton1.TabIndex = 2;
+            this.radioButton1.TabIndex = 1000;
             this.radioButton1.Text = "AB";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -556,7 +635,7 @@
             this.textBox13.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(51, 15);
-            this.textBox13.TabIndex = 0;
+            this.textBox13.TabIndex = 16;
             this.textBox13.Text = "-113.01";
             this.textBox13.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -568,7 +647,7 @@
             this.textBox11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(51, 15);
-            this.textBox11.TabIndex = 0;
+            this.textBox11.TabIndex = 14;
             this.textBox11.Text = "-113.01";
             this.textBox11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -580,7 +659,7 @@
             this.textBox9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(51, 15);
-            this.textBox9.TabIndex = 0;
+            this.textBox9.TabIndex = 12;
             this.textBox9.Text = "-63.2";
             this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -592,7 +671,7 @@
             this.textBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(51, 15);
-            this.textBox7.TabIndex = 0;
+            this.textBox7.TabIndex = 10;
             this.textBox7.Text = "120";
             this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -604,7 +683,7 @@
             this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(51, 15);
-            this.textBox5.TabIndex = 0;
+            this.textBox5.TabIndex = 8;
             this.textBox5.Text = "-124";
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -616,7 +695,7 @@
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(51, 15);
-            this.textBox3.TabIndex = 0;
+            this.textBox3.TabIndex = 6;
             this.textBox3.Text = "-36.2";
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -628,7 +707,7 @@
             this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(51, 15);
-            this.textBox6.TabIndex = 0;
+            this.textBox6.TabIndex = 9;
             this.textBox6.Text = "143.1";
             this.textBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -640,7 +719,7 @@
             this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(51, 15);
-            this.textBox4.TabIndex = 0;
+            this.textBox4.TabIndex = 7;
             this.textBox4.Text = "127.9";
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -652,7 +731,7 @@
             this.textBox12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(51, 15);
-            this.textBox12.TabIndex = 0;
+            this.textBox12.TabIndex = 15;
             this.textBox12.Text = "3";
             this.textBox12.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -664,7 +743,7 @@
             this.textBox10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(51, 15);
-            this.textBox10.TabIndex = 0;
+            this.textBox10.TabIndex = 13;
             this.textBox10.Text = "3";
             this.textBox10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -676,7 +755,7 @@
             this.textBox8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(51, 15);
-            this.textBox8.TabIndex = 0;
+            this.textBox8.TabIndex = 11;
             this.textBox8.Text = "566";
             this.textBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -688,7 +767,7 @@
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(51, 15);
-            this.textBox2.TabIndex = 0;
+            this.textBox2.TabIndex = 5;
             this.textBox2.Text = "38.5645";
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -741,7 +820,7 @@
             this.Im_seq_neg_TB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Im_seq_neg_TB.Name = "Im_seq_neg_TB";
             this.Im_seq_neg_TB.Size = new System.Drawing.Size(40, 15);
-            this.Im_seq_neg_TB.TabIndex = 0;
+            this.Im_seq_neg_TB.TabIndex = 3;
             this.Im_seq_neg_TB.Text = "60";
             this.Im_seq_neg_TB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -753,7 +832,7 @@
             this.Im_seq_pos_TB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Im_seq_pos_TB.Name = "Im_seq_pos_TB";
             this.Im_seq_pos_TB.Size = new System.Drawing.Size(40, 15);
-            this.Im_seq_pos_TB.TabIndex = 0;
+            this.Im_seq_pos_TB.TabIndex = 1;
             this.Im_seq_pos_TB.Text = "60";
             this.Im_seq_pos_TB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -765,7 +844,7 @@
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(43, 15);
-            this.textBox1.TabIndex = 0;
+            this.textBox1.TabIndex = 4;
             this.textBox1.Text = "0.8";
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -777,7 +856,7 @@
             this.Re_seq_neg_TB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Re_seq_neg_TB.Name = "Re_seq_neg_TB";
             this.Re_seq_neg_TB.Size = new System.Drawing.Size(51, 15);
-            this.Re_seq_neg_TB.TabIndex = 0;
+            this.Re_seq_neg_TB.TabIndex = 2;
             this.Re_seq_neg_TB.Text = "158.70";
             this.Re_seq_neg_TB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 

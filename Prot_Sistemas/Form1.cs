@@ -42,25 +42,36 @@ namespace Prot_Sistemas
                     chart1.ChartAreas[0].AxisX.Interval = 10;
                     chart1.ChartAreas[0].AxisY.Interval = 10;
                 }
-                if (chart1.ChartAreas[0].AxisX.Maximum > 61)
+                if ((chart1.ChartAreas[0].AxisX.Maximum > 61)&&(chart1.ChartAreas[0].AxisX.Maximum < 90))
                 {
                     chart1.ChartAreas[0].AxisX.Interval = 20;
                     chart1.ChartAreas[0].AxisY.Interval = 20;
                 }
-                if (e.Delta < 0) // Scrolled down.
+                if ((chart1.ChartAreas[0].AxisX.Maximum > 91)&&(chart1.ChartAreas[0].AxisX.Maximum > 200))
                 {
-                    chart1.ChartAreas[0].AxisX.Maximum = chart1.ChartAreas[0].AxisX.Maximum - 10;
-                    chart1.ChartAreas[0].AxisX.Minimum = chart1.ChartAreas[0].AxisX.Minimum + 10;
-                    chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY.Maximum - 10;
-                    chart1.ChartAreas[0].AxisY.Minimum = chart1.ChartAreas[0].AxisY.Minimum + 10;
-                    
+                    chart1.ChartAreas[0].AxisX.Interval = 50;
+                    chart1.ChartAreas[0].AxisY.Interval = 50;
                 }
-                else if (e.Delta > 0) // Scrolled up.
+                if (chart1.ChartAreas[0].AxisX.Maximum > 20)
                 {
-                    chart1.ChartAreas[0].AxisX.Maximum = chart1.ChartAreas[0].AxisX.Maximum + 10;
-                    chart1.ChartAreas[0].AxisX.Minimum = chart1.ChartAreas[0].AxisX.Minimum - 10;
-                    chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY.Maximum + 10;
-                    chart1.ChartAreas[0].AxisY.Minimum = chart1.ChartAreas[0].AxisY.Minimum - 10;
+                    if (e.Delta < 0) // Scrolled down.
+                    {
+                        chart1.ChartAreas[0].AxisX.Maximum = chart1.ChartAreas[0].AxisX.Maximum - 10;
+                        chart1.ChartAreas[0].AxisX.Minimum = chart1.ChartAreas[0].AxisX.Minimum + 10;
+                        chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY.Maximum - 10;
+                        chart1.ChartAreas[0].AxisY.Minimum = chart1.ChartAreas[0].AxisY.Minimum + 10;
+
+                    }                    
+                }
+                if (chart1.ChartAreas[0].AxisX.Maximum >= 20)
+                {
+                    if (e.Delta > 0) // Scrolled up.
+                    {
+                        chart1.ChartAreas[0].AxisX.Maximum = chart1.ChartAreas[0].AxisX.Maximum + 10;
+                        chart1.ChartAreas[0].AxisX.Minimum = chart1.ChartAreas[0].AxisX.Minimum - 10;
+                        chart1.ChartAreas[0].AxisY.Maximum = chart1.ChartAreas[0].AxisY.Maximum + 10;
+                        chart1.ChartAreas[0].AxisY.Minimum = chart1.ChartAreas[0].AxisY.Minimum - 10;
+                    }
                 }
             }
             catch { }
@@ -92,10 +103,11 @@ namespace Prot_Sistemas
         Complex In = 0;
         void polarization_calc()
         {
-            chart1.Series[0].Points.Clear();
-            chart1.Series[1].Points.Clear();
-            chart1.Series[2].Points.Clear();
-            chart1.Series[3].Points.Clear();
+            for (int x = 0; x < 14; x++)
+            {
+                chart1.Series[x].Points.Clear();
+            }
+            
 
             double ang_LT1 = Convert.ToDouble(Im_seq_pos_TB.Text);
             double ang_LT0 = Convert.ToDouble(Im_seq_neg_TB.Text);
@@ -113,19 +125,11 @@ namespace Prot_Sistemas
             Ic = new Complex(Convert.ToDouble(textBox12.Text) * Math.Cos(Convert.ToDouble(textBox13.Text) * Math.PI / 180), Convert.ToDouble(textBox12.Text) * Math.Sin(Convert.ToDouble(textBox13.Text) * Math.PI / 180));
             In = Ia + Ib + Ic;
             label19.Text = "" + Math.Round(k0.Real,3)+"+i"+Math.Round(k0.Imaginary,3);
-                                  
-            // AG
-            Complex IaG = Ia + (k0 * In);
-            Complex Sop_AG = (Zr * IaG) - Va;
-            Complex Spol_AG = Va;
-            Complex[] Zm =  { 0,Va / IaG};
-            chart1.Series["Zm_AG"].Points.AddXY(0, 0);
-            chart1.Series["Zm_AG"].Points.AddXY(Zm[1].Real, Zm[1].Imaginary);
-            Complex[] Sop = { Zm[1], (Zm[1] + (Sop_AG / IaG)) };
-            chart1.Series["Zpol_AG"].Points.AddXY(Sop[0].Real, Sop[0].Imaginary);
-            chart1.Series["Zpol_AG"].Points.AddXY(Sop[1].Real, Sop[1].Imaginary);
+
+            //Plot LT
             chart1.Series["LT"].Points.AddXY(0, 0);
             chart1.Series["LT"].Points.AddXY(LT_Z1.Real, LT_Z1.Imaginary);
+            //Plot MHO
             double radius = Complex.Abs(Zr) / 2;
             for (int k = 0; k <= 1000; k++)
             {
@@ -133,24 +137,92 @@ namespace Prot_Sistemas
                 double y = (radius * Math.Sin(Zr.Phase)) + radius * Math.Sin(k * 2 * Math.PI / 1000);
                 chart1.Series[0].Points.AddXY(x, y);
             }
-
+            // loop AG
+            Complex IaG = Ia + (k0 * In);
+            Complex[] Zm_AG =  { 0,Va / IaG};
+            chart1.Series["Zm_AG"].Points.AddXY(0, 0);
+            chart1.Series["Zm_AG"].Points.AddXY(Zm_AG[1].Real, Zm_AG[1].Imaginary);
+            Complex[] Sop_AG = { Zm_AG[1], (Zm_AG[1] + (((Zr * IaG) - Va) / IaG)) };
+            chart1.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
+            chart1.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
+            // loop BG
+            Complex IbG = Ib + (k0 * In);
+            Complex[] Zm_BG = { 0, Vb / IbG };
+            chart1.Series["Zm_BG"].Points.AddXY(0, 0);
+            chart1.Series["Zm_BG"].Points.AddXY(Zm_BG[1].Real, Zm_BG[1].Imaginary);
+            Complex[] Sop_BG = { Zm_BG[1], (Zm_BG[1] + (((Zr * IbG) - Vb) / IbG)) };
+            chart1.Series["Zpol_BG"].Points.AddXY(Sop_BG[0].Real, Sop_BG[0].Imaginary);
+            chart1.Series["Zpol_BG"].Points.AddXY(Sop_BG[1].Real, Sop_BG[1].Imaginary);
+            // loop CG
+            Complex IcG = Ic + (k0 * In);
+            Complex[] Zm_CG = { 0, Vc / IbG };
+            chart1.Series["Zm_CG"].Points.AddXY(0, 0);
+            chart1.Series["Zm_CG"].Points.AddXY(Zm_CG[1].Real, Zm_CG[1].Imaginary);
+            Complex[] Sop_CG = { Zm_CG[1], (Zm_CG[1] + (((Zr * IcG) - Vc) / IcG)) };
+            chart1.Series["Zpol_CG"].Points.AddXY(Sop_CG[0].Real, Sop_CG[0].Imaginary);
+            chart1.Series["Zpol_CG"].Points.AddXY(Sop_CG[1].Real, Sop_CG[1].Imaginary);
+            // loop AB
+            Complex Vab = Va - Vb;
+            Complex Iab = Ia - Ib;
+            Complex[] Zm_AB = { 0, Vab / Iab };
+            chart1.Series["Zm_AB"].Points.AddXY(0, 0);
+            chart1.Series["Zm_AB"].Points.AddXY(Zm_AB[1].Real, Zm_AB[1].Imaginary);
+            Complex[] Sop_AB = { Zm_AB[1], (Zm_AB[1] + (((Zr * Iab) - Vab) / Iab)) };
+            chart1.Series["Zpol_AB"].Points.AddXY(Sop_AB[0].Real, Sop_AB[0].Imaginary);
+            chart1.Series["Zpol_AB"].Points.AddXY(Sop_AB[1].Real, Sop_AB[1].Imaginary);
+            // loop BC
+            Complex Vbc = Vb - Vc;
+            Complex Ibc = Ib - Ic;
+            Complex[] Zm_BC = { 0, Vbc / Ibc };
+            chart1.Series["Zm_BC"].Points.AddXY(0, 0);
+            chart1.Series["Zm_BC"].Points.AddXY(Zm_BC[1].Real, Zm_BC[1].Imaginary);
+            Complex[] Sop_BC = { Zm_BC[1], (Zm_BC[1] + (((Zr * Ibc) - Vbc) / Ibc)) };
+            chart1.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
+            chart1.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+            // loop CA
+            Complex Vca = Vc - Va;
+            Complex Ica = Ic - Ia;
+            Complex[] Zm_CA = { 0, Vca / Ica };
+            chart1.Series["Zm_CA"].Points.AddXY(0, 0);
+            chart1.Series["Zm_CA"].Points.AddXY(Zm_CA[1].Real, Zm_CA[1].Imaginary);
+            Complex[] Sop_CA = { Zm_CA[1], (Zm_CA[1] + (((Zr * Ica) - Vca) / Ica)) };
+            chart1.Series["Zpol_CA"].Points.AddXY(Sop_CA[0].Real, Sop_CA[0].Imaginary);
+            chart1.Series["Zpol_CA"].Points.AddXY(Sop_CA[1].Real, Sop_CA[1].Imaginary);
         }
         void loops_fault()
         {
             //AB
             if (radioButton1.Checked == true)
             {
-
+                chart1.Series["Zpol_AB"].Enabled = true;
+                chart1.Series["Zm_AB"].Enabled = true;
+            }
+            else
+            {
+                chart1.Series["Zpol_AB"].Enabled = false;
+                chart1.Series["Zm_AB"].Enabled = false;
             }
             //BC
             if (radioButton2.Checked == true)
             {
-
+                chart1.Series["Zpol_BC"].Enabled = true;
+                chart1.Series["Zm_BC"].Enabled = true;
+            }
+            else
+            {
+                chart1.Series["Zpol_BC"].Enabled = false;
+                chart1.Series["Zm_BC"].Enabled = false;
             }
             //CA
             if (radioButton3.Checked == true)
             {
-
+                chart1.Series["Zpol_CA"].Enabled = true;
+                chart1.Series["Zm_CA"].Enabled = true;
+            }
+            else
+            {
+                chart1.Series["Zpol_CA"].Enabled = false;
+                chart1.Series["Zm_CA"].Enabled = false;
             }
             //AG
             if (radioButton4.Checked == true)
@@ -166,12 +238,24 @@ namespace Prot_Sistemas
             //BG
             if (radioButton5.Checked == true)
             {
-
+                chart1.Series["Zpol_BG"].Enabled = true;
+                chart1.Series["Zm_BG"].Enabled = true;
+            }
+            else
+            {
+                chart1.Series["Zpol_BG"].Enabled = false;
+                chart1.Series["Zm_BG"].Enabled = false;
             }
             //CG
             if (radioButton6.Checked == true)
             {
-
+                chart1.Series["Zpol_CG"].Enabled = true;
+                chart1.Series["Zm_CG"].Enabled = true;
+            }
+            else
+            {
+                chart1.Series["Zpol_CG"].Enabled = false;
+                chart1.Series["Zm_CG"].Enabled = false;
             }
         }
 
