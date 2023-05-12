@@ -28,23 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -67,11 +50,39 @@
             System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series37 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series38 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series39 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.textBox20 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -126,24 +137,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBox21 = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -161,11 +165,12 @@
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.Image = global::Prot_Sistemas.Properties.Resources.Run;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Text = "Run &F5";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator1
             // 
@@ -197,6 +202,288 @@
             this.tabPage2.Text = "Polarization";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label21);
+            this.groupBox6.Controls.Add(this.label20);
+            this.groupBox6.Controls.Add(this.comboBox1);
+            this.groupBox6.Controls.Add(this.chart2);
+            this.groupBox6.Controls.Add(this.textBox21);
+            this.groupBox6.Controls.Add(this.textBox20);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox6.Location = new System.Drawing.Point(658, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox6.Size = new System.Drawing.Size(408, 482);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Dynamic Polarization MHO";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(7, 442);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(14, 16);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "α";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(7, 423);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(34, 16);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "Kpol";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Dual Polarization",
+            "Alternative Dual",
+            "Cross Polarization",
+            "Cross with Voltage Memory",
+            "Positive Sequence Polarizatioon",
+            "Positive Sequence with Voltage Memory"});
+            this.comboBox1.Location = new System.Drawing.Point(138, 420);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(263, 24);
+            this.comboBox1.TabIndex = 2;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // chart2
+            // 
+            chartArea1.AxisX.Crossing = 0D;
+            chartArea1.AxisX.MajorGrid.Interval = 0D;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Silver;
+            chartArea1.AxisX.MinorGrid.Enabled = true;
+            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            chartArea1.AxisY.Crossing = 0D;
+            chartArea1.AxisY.MajorGrid.Interval = 0D;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Silver;
+            chartArea1.AxisY.MinorGrid.Enabled = true;
+            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisY.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            chartArea1.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea1);
+            this.chart2.Dock = System.Windows.Forms.DockStyle.Top;
+            legend1.Alignment = System.Drawing.StringAlignment.Far;
+            legend1.AutoFitMinFontSize = 6;
+            legend1.BackColor = System.Drawing.Color.White;
+            legend1.BorderColor = System.Drawing.Color.Black;
+            legend1.DockedToChartArea = "ChartArea1";
+            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+            legend1.Name = "Legend1";
+            this.chart2.Legends.Add(legend1);
+            this.chart2.Location = new System.Drawing.Point(4, 19);
+            this.chart2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chart2.Name = "chart2";
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Black;
+            series1.Legend = "Legend1";
+            series1.Name = "LT";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Blue;
+            series2.Legend = "Legend1";
+            series2.Name = "Mho_AG";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.DarkOrange;
+            series3.Legend = "Legend1";
+            series3.Name = "Zm_AG";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.Fuchsia;
+            series4.Legend = "Legend1";
+            series4.Name = "Zpol_AG";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Color = System.Drawing.Color.Red;
+            series5.Legend = "Legend1";
+            series5.Name = "Zs_AG";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Color = System.Drawing.Color.Blue;
+            series6.Enabled = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Mho_BG";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Color = System.Drawing.Color.DarkOrange;
+            series7.Enabled = false;
+            series7.Legend = "Legend1";
+            series7.Name = "Zm_BG";
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = System.Drawing.Color.Fuchsia;
+            series8.Enabled = false;
+            series8.Legend = "Legend1";
+            series8.Name = "Zpol_BG";
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Color = System.Drawing.Color.Red;
+            series9.Enabled = false;
+            series9.Legend = "Legend1";
+            series9.Name = "Zs_BG";
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series10.Color = System.Drawing.Color.DarkOrange;
+            series10.Enabled = false;
+            series10.Legend = "Legend1";
+            series10.Name = "Zm_CG";
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series11.Color = System.Drawing.Color.Fuchsia;
+            series11.Enabled = false;
+            series11.Legend = "Legend1";
+            series11.Name = "Zpol_CG";
+            series12.ChartArea = "ChartArea1";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series12.Color = System.Drawing.Color.Red;
+            series12.Enabled = false;
+            series12.Legend = "Legend1";
+            series12.Name = "Zs_CG";
+            series13.ChartArea = "ChartArea1";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series13.Color = System.Drawing.Color.Blue;
+            series13.Enabled = false;
+            series13.Legend = "Legend1";
+            series13.Name = "Mho_AB";
+            series14.ChartArea = "ChartArea1";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.Color = System.Drawing.Color.DarkOrange;
+            series14.Enabled = false;
+            series14.Legend = "Legend1";
+            series14.Name = "Zm_AB";
+            series15.ChartArea = "ChartArea1";
+            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series15.Color = System.Drawing.Color.Fuchsia;
+            series15.Enabled = false;
+            series15.Legend = "Legend1";
+            series15.Name = "Zpol_AB";
+            series16.ChartArea = "ChartArea1";
+            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series16.Color = System.Drawing.Color.Red;
+            series16.Enabled = false;
+            series16.Legend = "Legend1";
+            series16.Name = "Zs_AB";
+            series17.ChartArea = "ChartArea1";
+            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series17.Color = System.Drawing.Color.Blue;
+            series17.Enabled = false;
+            series17.Legend = "Legend1";
+            series17.Name = "Mho_BC";
+            series18.ChartArea = "ChartArea1";
+            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series18.Color = System.Drawing.Color.DarkOrange;
+            series18.Enabled = false;
+            series18.Legend = "Legend1";
+            series18.Name = "Zm_BC";
+            series19.ChartArea = "ChartArea1";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series19.Color = System.Drawing.Color.Fuchsia;
+            series19.Enabled = false;
+            series19.Legend = "Legend1";
+            series19.Name = "Zpol_BC";
+            series20.ChartArea = "ChartArea1";
+            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series20.Color = System.Drawing.Color.Red;
+            series20.Enabled = false;
+            series20.Legend = "Legend1";
+            series20.Name = "Zs_BC";
+            series21.ChartArea = "ChartArea1";
+            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series21.Color = System.Drawing.Color.Blue;
+            series21.Enabled = false;
+            series21.Legend = "Legend1";
+            series21.Name = "Mho_CA";
+            series22.ChartArea = "ChartArea1";
+            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series22.Color = System.Drawing.Color.DarkOrange;
+            series22.Enabled = false;
+            series22.Legend = "Legend1";
+            series22.Name = "Zm_CA";
+            series23.ChartArea = "ChartArea1";
+            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series23.Color = System.Drawing.Color.Fuchsia;
+            series23.Enabled = false;
+            series23.Legend = "Legend1";
+            series23.Name = "Zpol_CA";
+            series24.ChartArea = "ChartArea1";
+            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series24.Color = System.Drawing.Color.Red;
+            series24.Enabled = false;
+            series24.Legend = "Legend1";
+            series24.Name = "Zs_CA";
+            series25.ChartArea = "ChartArea1";
+            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series25.Color = System.Drawing.Color.Blue;
+            series25.Enabled = false;
+            series25.Legend = "Legend1";
+            series25.Name = "Mho_CG";
+            this.chart2.Series.Add(series1);
+            this.chart2.Series.Add(series2);
+            this.chart2.Series.Add(series3);
+            this.chart2.Series.Add(series4);
+            this.chart2.Series.Add(series5);
+            this.chart2.Series.Add(series6);
+            this.chart2.Series.Add(series7);
+            this.chart2.Series.Add(series8);
+            this.chart2.Series.Add(series9);
+            this.chart2.Series.Add(series10);
+            this.chart2.Series.Add(series11);
+            this.chart2.Series.Add(series12);
+            this.chart2.Series.Add(series13);
+            this.chart2.Series.Add(series14);
+            this.chart2.Series.Add(series15);
+            this.chart2.Series.Add(series16);
+            this.chart2.Series.Add(series17);
+            this.chart2.Series.Add(series18);
+            this.chart2.Series.Add(series19);
+            this.chart2.Series.Add(series20);
+            this.chart2.Series.Add(series21);
+            this.chart2.Series.Add(series22);
+            this.chart2.Series.Add(series23);
+            this.chart2.Series.Add(series24);
+            this.chart2.Series.Add(series25);
+            this.chart2.Size = new System.Drawing.Size(400, 400);
+            this.chart2.TabIndex = 1;
+            this.chart2.Text = "chart2";
+            // 
+            // textBox21
+            // 
+            this.textBox21.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox21.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox21.Location = new System.Drawing.Point(47, 442);
+            this.textBox21.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox21.Name = "textBox21";
+            this.textBox21.Size = new System.Drawing.Size(51, 15);
+            this.textBox21.TabIndex = 21;
+            this.textBox21.Text = "0.5";
+            this.textBox21.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // textBox20
+            // 
+            this.textBox20.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox20.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox20.Location = new System.Drawing.Point(47, 423);
+            this.textBox20.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox20.Name = "textBox20";
+            this.textBox20.Size = new System.Drawing.Size(51, 15);
+            this.textBox20.TabIndex = 21;
+            this.textBox20.Text = "0.1";
+            this.textBox20.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.chart1);
@@ -213,8 +500,7 @@
             // chart1
             // 
             chartArea2.AxisX.Crossing = 0D;
-            chartArea2.AxisX.Interval = 10D;
-            chartArea2.AxisX.MajorGrid.Interval = 10D;
+            chartArea2.AxisX.MajorGrid.Interval = 0D;
             chartArea2.AxisX.MajorGrid.LineColor = System.Drawing.Color.Silver;
             chartArea2.AxisX.Maximum = 50D;
             chartArea2.AxisX.Minimum = -30D;
@@ -222,11 +508,8 @@
             chartArea2.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea2.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             chartArea2.AxisY.Crossing = 0D;
-            chartArea2.AxisY.Interval = 10D;
-            chartArea2.AxisY.MajorGrid.Interval = 10D;
+            chartArea2.AxisY.MajorGrid.Interval = 0D;
             chartArea2.AxisY.MajorGrid.LineColor = System.Drawing.Color.Silver;
-            chartArea2.AxisY.Maximum = 50D;
-            chartArea2.AxisY.Minimum = -30D;
             chartArea2.AxisY.MinorGrid.Enabled = true;
             chartArea2.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea2.AxisY.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
@@ -246,92 +529,87 @@
             this.chart1.Location = new System.Drawing.Point(4, 19);
             this.chart1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chart1.Name = "chart1";
-            series21.ChartArea = "ChartArea1";
-            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series21.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            series21.Legend = "Legend1";
-            series21.Name = "Mho";
-            series22.BorderWidth = 2;
-            series22.ChartArea = "ChartArea1";
-            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series22.Color = System.Drawing.Color.Black;
-            series22.Legend = "Legend1";
-            series22.Name = "LT";
-            series23.ChartArea = "ChartArea1";
-            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series23.Color = System.Drawing.Color.DarkOrange;
-            series23.Legend = "Legend1";
-            series23.Name = "Zm_AG";
-            series24.ChartArea = "ChartArea1";
-            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series24.Color = System.Drawing.Color.Fuchsia;
-            series24.Legend = "Legend1";
-            series24.Name = "Zpol_AG";
-            series25.ChartArea = "ChartArea1";
-            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series25.Color = System.Drawing.Color.DarkOrange;
-            series25.Enabled = false;
-            series25.Legend = "Legend1";
-            series25.Name = "Zm_BG";
             series26.ChartArea = "ChartArea1";
             series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series26.Color = System.Drawing.Color.Fuchsia;
-            series26.Enabled = false;
+            series26.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series26.Legend = "Legend1";
-            series26.Name = "Zpol_BG";
+            series26.Name = "Mho";
+            series27.BorderWidth = 2;
             series27.ChartArea = "ChartArea1";
             series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series27.Color = System.Drawing.Color.DarkOrange;
-            series27.Enabled = false;
+            series27.Color = System.Drawing.Color.Black;
             series27.Legend = "Legend1";
-            series27.Name = "Zm_CG";
+            series27.Name = "LT";
             series28.ChartArea = "ChartArea1";
             series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series28.Color = System.Drawing.Color.Fuchsia;
-            series28.Enabled = false;
+            series28.Color = System.Drawing.Color.DarkOrange;
             series28.Legend = "Legend1";
-            series28.Name = "Zpol_CG";
+            series28.Name = "Zm_AG";
             series29.ChartArea = "ChartArea1";
             series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series29.Color = System.Drawing.Color.DarkOrange;
-            series29.Enabled = false;
+            series29.Color = System.Drawing.Color.Fuchsia;
             series29.Legend = "Legend1";
-            series29.Name = "Zm_AB";
+            series29.Name = "Zpol_AG";
             series30.ChartArea = "ChartArea1";
             series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series30.Color = System.Drawing.Color.Fuchsia;
+            series30.Color = System.Drawing.Color.DarkOrange;
             series30.Enabled = false;
             series30.Legend = "Legend1";
-            series30.Name = "Zpol_AB";
+            series30.Name = "Zm_BG";
             series31.ChartArea = "ChartArea1";
             series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series31.Color = System.Drawing.Color.DarkOrange;
+            series31.Color = System.Drawing.Color.Fuchsia;
             series31.Enabled = false;
             series31.Legend = "Legend1";
-            series31.Name = "Zm_BC";
+            series31.Name = "Zpol_BG";
             series32.ChartArea = "ChartArea1";
             series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series32.Color = System.Drawing.Color.Fuchsia;
+            series32.Color = System.Drawing.Color.DarkOrange;
             series32.Enabled = false;
             series32.Legend = "Legend1";
-            series32.Name = "Zpol_BC";
+            series32.Name = "Zm_CG";
             series33.ChartArea = "ChartArea1";
             series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series33.Color = System.Drawing.Color.DarkOrange;
+            series33.Color = System.Drawing.Color.Fuchsia;
             series33.Enabled = false;
             series33.Legend = "Legend1";
-            series33.Name = "Zm_CA";
+            series33.Name = "Zpol_CG";
             series34.ChartArea = "ChartArea1";
             series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series34.Color = System.Drawing.Color.Fuchsia;
+            series34.Color = System.Drawing.Color.DarkOrange;
             series34.Enabled = false;
             series34.Legend = "Legend1";
-            series34.Name = "Zpol_CA";
-            this.chart1.Series.Add(series21);
-            this.chart1.Series.Add(series22);
-            this.chart1.Series.Add(series23);
-            this.chart1.Series.Add(series24);
-            this.chart1.Series.Add(series25);
+            series34.Name = "Zm_AB";
+            series35.ChartArea = "ChartArea1";
+            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series35.Color = System.Drawing.Color.Fuchsia;
+            series35.Enabled = false;
+            series35.Legend = "Legend1";
+            series35.Name = "Zpol_AB";
+            series36.ChartArea = "ChartArea1";
+            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series36.Color = System.Drawing.Color.DarkOrange;
+            series36.Enabled = false;
+            series36.Legend = "Legend1";
+            series36.Name = "Zm_BC";
+            series37.ChartArea = "ChartArea1";
+            series37.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series37.Color = System.Drawing.Color.Fuchsia;
+            series37.Enabled = false;
+            series37.Legend = "Legend1";
+            series37.Name = "Zpol_BC";
+            series38.ChartArea = "ChartArea1";
+            series38.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series38.Color = System.Drawing.Color.DarkOrange;
+            series38.Enabled = false;
+            series38.Legend = "Legend1";
+            series38.Name = "Zm_CA";
+            series39.ChartArea = "ChartArea1";
+            series39.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series39.Color = System.Drawing.Color.Fuchsia;
+            series39.Enabled = false;
+            series39.Legend = "Legend1";
+            series39.Name = "Zpol_CA";
             this.chart1.Series.Add(series26);
             this.chart1.Series.Add(series27);
             this.chart1.Series.Add(series28);
@@ -341,6 +619,11 @@
             this.chart1.Series.Add(series32);
             this.chart1.Series.Add(series33);
             this.chart1.Series.Add(series34);
+            this.chart1.Series.Add(series35);
+            this.chart1.Series.Add(series36);
+            this.chart1.Series.Add(series37);
+            this.chart1.Series.Add(series38);
+            this.chart1.Series.Add(series39);
             this.chart1.Size = new System.Drawing.Size(400, 400);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -959,259 +1242,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Impedance Seq.+";
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.label21);
-            this.groupBox6.Controls.Add(this.label20);
-            this.groupBox6.Controls.Add(this.comboBox1);
-            this.groupBox6.Controls.Add(this.chart2);
-            this.groupBox6.Controls.Add(this.textBox21);
-            this.groupBox6.Controls.Add(this.textBox20);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox6.Location = new System.Drawing.Point(658, 2);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox6.Size = new System.Drawing.Size(408, 482);
-            this.groupBox6.TabIndex = 3;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Dynamic Polarization MHO";
-            // 
-            // chart2
-            // 
-            chartArea1.AxisX.Crossing = 0D;
-            chartArea1.AxisX.Interval = 10D;
-            chartArea1.AxisX.MajorGrid.Interval = 10D;
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Silver;
-            chartArea1.AxisX.Maximum = 50D;
-            chartArea1.AxisX.Minimum = -30D;
-            chartArea1.AxisX.MinorGrid.Enabled = true;
-            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea1.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            chartArea1.AxisY.Crossing = 0D;
-            chartArea1.AxisY.Interval = 10D;
-            chartArea1.AxisY.MajorGrid.Interval = 10D;
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Silver;
-            chartArea1.AxisY.Maximum = 50D;
-            chartArea1.AxisY.Minimum = -30D;
-            chartArea1.AxisY.MinorGrid.Enabled = true;
-            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
-            chartArea1.AxisY.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            chartArea1.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea1);
-            this.chart2.Dock = System.Windows.Forms.DockStyle.Top;
-            legend1.Alignment = System.Drawing.StringAlignment.Far;
-            legend1.AutoFitMinFontSize = 6;
-            legend1.BackColor = System.Drawing.Color.White;
-            legend1.BorderColor = System.Drawing.Color.Black;
-            legend1.DockedToChartArea = "ChartArea1";
-            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
-            legend1.Name = "Legend1";
-            this.chart2.Legends.Add(legend1);
-            this.chart2.Location = new System.Drawing.Point(4, 19);
-            this.chart2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.chart2.Name = "chart2";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            series1.Legend = "Legend1";
-            series1.Name = "Mho";
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Color = System.Drawing.Color.Black;
-            series2.Legend = "Legend1";
-            series2.Name = "LT";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Color = System.Drawing.Color.DarkOrange;
-            series3.Legend = "Legend1";
-            series3.Name = "Zm_AG";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Color = System.Drawing.Color.Fuchsia;
-            series4.Legend = "Legend1";
-            series4.Name = "Zpol_AG";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Color = System.Drawing.Color.Red;
-            series5.Legend = "Legend1";
-            series5.Name = "Zs_AG";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Color = System.Drawing.Color.DarkOrange;
-            series6.Enabled = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Zm_BG";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Color = System.Drawing.Color.Fuchsia;
-            series7.Enabled = false;
-            series7.Legend = "Legend1";
-            series7.Name = "Zpol_BG";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Color = System.Drawing.Color.Red;
-            series8.Enabled = false;
-            series8.Legend = "Legend1";
-            series8.Name = "Zs_BG";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Color = System.Drawing.Color.DarkOrange;
-            series9.Enabled = false;
-            series9.Legend = "Legend1";
-            series9.Name = "Zm_CG";
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series10.Color = System.Drawing.Color.Fuchsia;
-            series10.Enabled = false;
-            series10.Legend = "Legend1";
-            series10.Name = "Zpol_CG";
-            series11.ChartArea = "ChartArea1";
-            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series11.Color = System.Drawing.Color.Red;
-            series11.Enabled = false;
-            series11.Legend = "Legend1";
-            series11.Name = "Zs_CG";
-            series12.ChartArea = "ChartArea1";
-            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series12.Color = System.Drawing.Color.DarkOrange;
-            series12.Enabled = false;
-            series12.Legend = "Legend1";
-            series12.Name = "Zm_AB";
-            series13.ChartArea = "ChartArea1";
-            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series13.Color = System.Drawing.Color.Fuchsia;
-            series13.Enabled = false;
-            series13.Legend = "Legend1";
-            series13.Name = "Zpol_AB";
-            series14.ChartArea = "ChartArea1";
-            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series14.Color = System.Drawing.Color.Red;
-            series14.Enabled = false;
-            series14.Legend = "Legend1";
-            series14.Name = "Zs_AB";
-            series15.ChartArea = "ChartArea1";
-            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series15.Color = System.Drawing.Color.DarkOrange;
-            series15.Enabled = false;
-            series15.Legend = "Legend1";
-            series15.Name = "Zm_BC";
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series16.Color = System.Drawing.Color.Fuchsia;
-            series16.Enabled = false;
-            series16.Legend = "Legend1";
-            series16.Name = "Zpol_BC";
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series17.Color = System.Drawing.Color.Red;
-            series17.Enabled = false;
-            series17.Legend = "Legend1";
-            series17.Name = "Zs_BC";
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series18.Color = System.Drawing.Color.DarkOrange;
-            series18.Enabled = false;
-            series18.Legend = "Legend1";
-            series18.Name = "Zm_CA";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series19.Color = System.Drawing.Color.Fuchsia;
-            series19.Enabled = false;
-            series19.Legend = "Legend1";
-            series19.Name = "Zpol_CA";
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series20.Color = System.Drawing.Color.Red;
-            series20.Enabled = false;
-            series20.Legend = "Legend1";
-            series20.Name = "Zs_CA";
-            this.chart2.Series.Add(series1);
-            this.chart2.Series.Add(series2);
-            this.chart2.Series.Add(series3);
-            this.chart2.Series.Add(series4);
-            this.chart2.Series.Add(series5);
-            this.chart2.Series.Add(series6);
-            this.chart2.Series.Add(series7);
-            this.chart2.Series.Add(series8);
-            this.chart2.Series.Add(series9);
-            this.chart2.Series.Add(series10);
-            this.chart2.Series.Add(series11);
-            this.chart2.Series.Add(series12);
-            this.chart2.Series.Add(series13);
-            this.chart2.Series.Add(series14);
-            this.chart2.Series.Add(series15);
-            this.chart2.Series.Add(series16);
-            this.chart2.Series.Add(series17);
-            this.chart2.Series.Add(series18);
-            this.chart2.Series.Add(series19);
-            this.chart2.Series.Add(series20);
-            this.chart2.Size = new System.Drawing.Size(400, 400);
-            this.chart2.TabIndex = 1;
-            this.chart2.Text = "chart2";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Dual Polarization",
-            "Alternative Dual",
-            "Cross Polarization",
-            "Cross with Voltage Memory",
-            "Positive Sequence Polarizatioon",
-            "Positive Sequence with Voltage Memory"});
-            this.comboBox1.Location = new System.Drawing.Point(138, 420);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(263, 24);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // textBox20
-            // 
-            this.textBox20.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox20.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox20.Location = new System.Drawing.Point(47, 423);
-            this.textBox20.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(51, 15);
-            this.textBox20.TabIndex = 21;
-            this.textBox20.Text = "0.1";
-            this.textBox20.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(7, 423);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(34, 16);
-            this.label20.TabIndex = 1;
-            this.label20.Text = "Kpol";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 442);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(14, 16);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "α";
-            // 
-            // textBox21
-            // 
-            this.textBox21.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox21.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox21.Location = new System.Drawing.Point(47, 442);
-            this.textBox21.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(51, 15);
-            this.textBox21.TabIndex = 21;
-            this.textBox21.Text = "0.5";
-            this.textBox21.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1227,6 +1257,9 @@
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -1236,9 +1269,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

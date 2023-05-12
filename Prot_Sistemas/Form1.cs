@@ -11,6 +11,8 @@ using System.Numerics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using System.Xml.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Runtime.CompilerServices;
 
 namespace Prot_Sistemas
 {
@@ -23,7 +25,21 @@ namespace Prot_Sistemas
             polarization_calc();
             chart1.MouseWheel += chart1_MouseWheel;
             chart2.MouseWheel += chart2_MouseWheel;
+            chart1.MouseMove += chart1_MouseMove;
+            chart1.MouseDown += chart1_MouseDown;
+            chart2.MouseMove += chart2_MouseMove;
+            chart2.MouseDown += chart2_MouseDown;
             comboBox1.SelectedItem = comboBox1.Items[0];
+
+            chart1.ChartAreas[0].AxisX.Maximum = 50;
+            chart1.ChartAreas[0].AxisX.Minimum = -30;
+            chart1.ChartAreas[0].AxisY.Maximum = 50;
+            chart1.ChartAreas[0].AxisY.Minimum = -30;
+            chart2.ChartAreas[0].AxisX.Maximum = 50;
+            chart2.ChartAreas[0].AxisX.Minimum = -30;
+            chart2.ChartAreas[0].AxisY.Maximum = 50;
+            chart2.ChartAreas[0].AxisY.Minimum = -30;
+
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -32,7 +48,66 @@ namespace Prot_Sistemas
                 polarization_calc();
             }
         }
+        double mDown_x = double.NaN;
+        double mDown_y = double.NaN;
+        private void chart1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Axis ax = chart1.ChartAreas[0].AxisX;
+            mDown_x = Math.Round(ax.PixelPositionToValue(e.Location.X),0);
+            Axis ay = chart1.ChartAreas[0].AxisY;
+            mDown_y = Math.Round(ay.PixelPositionToValue(e.Location.Y), 0);
+            if(e.Button.HasFlag(MouseButtons.Right))
+            {
+                chart1.ChartAreas[0].AxisX.Maximum = 50;
+                chart1.ChartAreas[0].AxisX.Minimum = -30;
+                chart1.ChartAreas[0].AxisY.Maximum = 50;
+                chart1.ChartAreas[0].AxisY.Minimum = -30;
+            }
+        }
+        private void chart1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!e.Button.HasFlag(MouseButtons.Left)) return;
+            Axis ax = chart1.ChartAreas[0].AxisX;
+            Axis ay = chart1.ChartAreas[0].AxisY;
+            double range_x = ax.Maximum - ax.Minimum;
+            double range_y = ay.Maximum - ay.Minimum;
+            double xv = ax.PixelPositionToValue(e.Location.X);
+            double yv = ay.PixelPositionToValue(e.Location.Y);
+            ax.Minimum -= Math.Round(xv - mDown_x,0);
+            ax.Maximum = Math.Round(ax.Minimum + range_x,0);
 
+            ay.Minimum -= Math.Round(yv - mDown_y, 0);
+            ay.Maximum = Math.Round(ay.Minimum + range_y, 0);
+        }
+        private void chart2_MouseDown(object sender, MouseEventArgs e)
+        {
+            Axis ax = chart2.ChartAreas[0].AxisX;
+            mDown_x = Math.Round(ax.PixelPositionToValue(e.Location.X), 0);
+            Axis ay = chart2.ChartAreas[0].AxisY;
+            mDown_y = Math.Round(ay.PixelPositionToValue(e.Location.Y), 0);
+            if (e.Button.HasFlag(MouseButtons.Right))
+            {
+                chart2.ChartAreas[0].AxisX.Maximum = 50;
+                chart2.ChartAreas[0].AxisX.Minimum = -30;
+                chart2.ChartAreas[0].AxisY.Maximum = 50;
+                chart2.ChartAreas[0].AxisY.Minimum = -30;
+            }
+        }
+        private void chart2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!e.Button.HasFlag(MouseButtons.Left)) return;
+            Axis ax = chart2.ChartAreas[0].AxisX;
+            Axis ay = chart2.ChartAreas[0].AxisY;
+            double range_x = ax.Maximum - ax.Minimum;
+            double range_y = ay.Maximum - ay.Minimum;
+            double xv = ax.PixelPositionToValue(e.Location.X);
+            double yv = ay.PixelPositionToValue(e.Location.Y);
+            ax.Minimum -= Math.Round(xv - mDown_x, 0);
+            ax.Maximum = Math.Round(ax.Minimum + range_x, 0);
+
+            ay.Minimum -= Math.Round(yv - mDown_y, 0);
+            ay.Maximum = Math.Round(ay.Minimum + range_y, 0);
+        }
         private void chart1_MouseWheel(object sender, MouseEventArgs e)
         {
             var chart = (Chart)sender;
@@ -41,22 +116,7 @@ namespace Prot_Sistemas
             double cursor = (e.X);
             
                 try
-                {
-                    if (chart1.ChartAreas[0].AxisX.Maximum <= 60)
-                    {
-                        chart1.ChartAreas[0].AxisX.Interval = 10;
-                        chart1.ChartAreas[0].AxisY.Interval = 10;
-                    }
-                    if ((chart1.ChartAreas[0].AxisX.Maximum > 61) && (chart1.ChartAreas[0].AxisX.Maximum < 90))
-                    {
-                        chart1.ChartAreas[0].AxisX.Interval = 20;
-                        chart1.ChartAreas[0].AxisY.Interval = 20;
-                    }
-                    if ((chart1.ChartAreas[0].AxisX.Maximum > 91) && (chart1.ChartAreas[0].AxisX.Maximum > 200))
-                    {
-                        chart1.ChartAreas[0].AxisX.Interval = 50;
-                        chart1.ChartAreas[0].AxisY.Interval = 50;
-                    }
+                {                    
                     if (chart1.ChartAreas[0].AxisX.Maximum > 20)
                     {
                         if (e.Delta < 0) // Scrolled down.
@@ -90,21 +150,7 @@ namespace Prot_Sistemas
             double cursor = (e.X);
             try
             {
-                if (chart2.ChartAreas[0].AxisX.Maximum <= 60)
-                {
-                    chart2.ChartAreas[0].AxisX.Interval = 10;
-                    chart2.ChartAreas[0].AxisY.Interval = 10;
-                }
-                if ((chart2.ChartAreas[0].AxisX.Maximum > 61) && (chart2.ChartAreas[0].AxisX.Maximum < 90))
-                {
-                    chart2.ChartAreas[0].AxisX.Interval = 20;
-                    chart2.ChartAreas[0].AxisY.Interval = 20;
-                }
-                if ((chart2.ChartAreas[0].AxisX.Maximum > 91) && (chart2.ChartAreas[0].AxisX.Maximum > 200))
-                {
-                    chart2.ChartAreas[0].AxisX.Interval = 50;
-                    chart2.ChartAreas[0].AxisY.Interval = 50;
-                }
+                
                 if (chart2.ChartAreas[0].AxisX.Maximum > 20)
                 {
                     if (e.Delta < 0) // Scrolled down.
@@ -116,7 +162,7 @@ namespace Prot_Sistemas
 
                     }
                 }
-                if (chart2.ChartAreas[0].AxisX.Maximum >= 20)
+                if (chart2.ChartAreas[0].AxisX.Maximum >= 10)
                 {
                     if (e.Delta > 0) // Scrolled up.
                     {
@@ -160,12 +206,12 @@ namespace Prot_Sistemas
             {
                 if(x<14)
                     chart1.Series[x].Points.Clear();
-                if(x<15)
+                if(x<25)
                     chart2.Series[x].Points.Clear();
             }
 
             Complex k_pol = 0;
-            k_pol = new Complex(Convert.ToDouble(textBox20.Text) * Math.Cos(90 * Math.PI / 180), Convert.ToDouble(textBox20.Text) * Math.Sin(90 * Math.PI / 180));
+            double kpol_abs = Convert.ToDouble(textBox20.Text);            
             Complex a = new Complex(1 * Math.Cos(120 * Math.PI / 180), 1 * Math.Sin(120 * Math.PI / 180));
             double alpha = Convert.ToDouble(textBox21.Text);
             double ang_LT1 = Convert.ToDouble(Im_seq_pos_TB.Text);
@@ -252,53 +298,366 @@ namespace Prot_Sistemas
             Complex[] Sop_CA = { Zm_CA[1], (Zm_CA[1] + (((Zr * Ica) - Vca) / Ica)) };
             chart1.Series["Zpol_CA"].Points.AddXY(Sop_CA[0].Real, Sop_CA[0].Imaginary);
             chart1.Series["Zpol_CA"].Points.AddXY(Sop_CA[1].Real, Sop_CA[1].Imaginary);
-            
+            // Dynamic Polarization loops
             switch (comboBox1.SelectedIndex)
             {
-                case 0:
-                    //dual mho AB                       
-                    Complex Sop_dual_AB = Vab + (k_pol * Vc);
-                    Complex Zpol_dual_AB = k_pol * Vc / Iab;
-                    Complex[] Zs_dual_AB = { Zm_AB[1] - (Sop_dual_AB / Iab), Zm_AB[1] };
-                    double r = (Complex.Abs(Zr - Zs_dual_AB[0])) / 2;
-                    for (int k = 0; k <= 1000; k++)
+                case 0: // Dual
                     {
-                        double x = (((Zm_AB[1].Real + ((Zr * Iab - Vab) / IaG).Real + Zs_dual_AB[0].Real) / 2)) + r * Math.Cos(k * 2 * Math.PI / 1000);
-                        double y = (((Zm_AB[1].Imaginary + ((Zr * Iab - Vab) / Iab).Imaginary + Zs_dual_AB[0].Imaginary) / 2)) + r * Math.Sin(k * 2 * Math.PI / 1000);
-                        chart2.Series[0].Points.AddXY(x, y);
-                    }
-                    chart2.Series["Zs_AB"].Points.AddXY(0, 0);
-                    chart2.Series["Zs_AB"].Points.AddXY(Zs_dual_AB[0].Real, Zs_dual_AB[0].Imaginary);
-                    chart2.Series["Zm_AB"].Points.AddXY(Zs_dual_AB[0].Real, Zs_dual_AB[0].Imaginary);
-                    chart2.Series["Zm_AB"].Points.AddXY(Zs_dual_AB[1].Real, Zs_dual_AB[1].Imaginary);
-                    chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[0].Real, Sop_AB[0].Imaginary);
-                    chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[1].Real, Sop_AB[1].Imaginary);
+                        textBox21.Font = new Font(textBox20.Font, FontStyle.Strikeout);
+                        //dual mho AB                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_dual_AB = Vab + (k_pol * Vc);
+                        Complex Zpol_dual_AB = k_pol * Vc / Iab;
+                        Complex[] Zs_dual_AB = { -Zpol_dual_AB, Zm_AB[1] };
+                        double r_dual_AB = (Complex.Abs(Zr - Zs_dual_AB[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_AB[1].Real + ((Zr * Iab - Vab) / Iab).Real + Zs_dual_AB[0].Real) / 2)) + r_dual_AB * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_AB[1].Imaginary + ((Zr * Iab - Vab) / Iab).Imaginary + Zs_dual_AB[0].Imaginary) / 2)) + r_dual_AB * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AB"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_AB"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_AB"].Points.AddXY(Zs_dual_AB[0].Real, Zs_dual_AB[0].Imaginary);
+                        chart2.Series["Zm_AB"].Points.AddXY(Zs_dual_AB[0].Real, Zs_dual_AB[0].Imaginary);
+                        chart2.Series["Zm_AB"].Points.AddXY(Zs_dual_AB[1].Real, Zs_dual_AB[1].Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[0].Real, Sop_AB[0].Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[1].Real, Sop_AB[1].Imaginary);
 
-                    //dual mho AG                       
-                    Complex Sop_dual_AG = Va + (k_pol * Vbc);
-                    Complex Zpol_dual_AG = k_pol * Vbc / IaG;
-                    Complex[] Zs_dual_AG = { Zm_AG[1] - (Sop_dual_AG / IaG), Zm_AG[1] };
-                    radius = (Complex.Abs(Zr - Zs_dual_AG[0])) / 2;
-                    for (int k = 0; k <= 1000; k++)
+                        //dual mho BC                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_dual_BC = Vbc + (k_pol * Va);
+                        Complex Zpol_dual_BC = k_pol * Va / Ibc;
+                        Complex[] Zs_dual_BC = { -Zpol_dual_BC, Zm_BC[1] };
+                        double r_dual_BC = (Complex.Abs(Zr - Zs_dual_BC[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_BC[1].Real + ((Zr * Ibc - Vbc) / Ibc).Real + Zs_dual_AB[0].Real) / 2)) + r_dual_BC * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_BC[1].Imaginary + ((Zr * Ibc - Vbc) / Ibc).Imaginary + Zs_dual_BC[0].Imaginary) / 2)) + r_dual_BC * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BC"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_BC"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_BC"].Points.AddXY(Zs_dual_BC[0].Real, Zs_dual_BC[0].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_dual_BC[0].Real, Zs_dual_BC[0].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_dual_BC[1].Real, Zs_dual_BC[1].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+
+                        //dual mho CA                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_dual_CA = Vca + (k_pol * Vb);
+                        Complex Zpol_dual_CA = k_pol * Vb / Ica;
+                        Complex[] Zs_dual_CA = { -Zpol_dual_CA, Zm_CA[1] };
+                        double r_dual_CA = (Complex.Abs(Zr - Zs_dual_CA[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_CA[1].Real + ((Zr * Ica - Vca) / Ica).Real + Zs_dual_CA[0].Real) / 2)) + r_dual_CA * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_CA[1].Imaginary + ((Zr * Ica - Vca) / Ica).Imaginary + Zs_dual_CA[0].Imaginary) / 2)) + r_dual_CA * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CA"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_CA"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_CA"].Points.AddXY(Zs_dual_CA[0].Real, Zs_dual_CA[0].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zs_dual_CA[0].Real, Zs_dual_CA[0].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zs_dual_CA[1].Real, Zs_dual_CA[1].Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[0].Real, Sop_CA[0].Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[1].Real, Sop_CA[1].Imaginary);
+
+                        //dual mho AG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_dual_AG = Va + (k_pol * Vbc);
+                        Complex Zpol_dual_AG = k_pol * Vbc / IaG;
+                        Complex[] Zs_dual_AG = { -Zpol_dual_AG, Zm_AG[1] };
+                        radius = (Complex.Abs(Zr - Zs_dual_AG[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_AG[1].Real + ((Zr * IaG - Va) / IaG).Real + Zs_dual_AG[0].Real) / 2)) + radius * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_AG[1].Imaginary + ((Zr * IaG - Va) / IaG).Imaginary + Zs_dual_AG[0].Imaginary) / 2)) + radius * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_AG"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_AG"].Points.AddXY(Zs_dual_AG[0].Real, Zs_dual_AG[0].Imaginary);
+                        chart2.Series["Zm_AG"].Points.AddXY(Zs_dual_AG[0].Real, Zs_dual_AG[0].Imaginary);
+                        chart2.Series["Zm_AG"].Points.AddXY(Zs_dual_AG[1].Real, Zs_dual_AG[1].Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
+                                               
+                        //dual mho BG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_dual_BG = Vb + (k_pol * Vca);
+                        Complex Zpol_dual_BG = k_pol * Vca / IbG;
+                        Complex[] Zs_dual_BG = { -Zpol_dual_BG, Zm_BG[1] };
+                        double r_dual_BG = (Complex.Abs(Zr - Zs_dual_BG[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_BG[1].Real + ((Zr * IbG - Vb) / IbG).Real + Zs_dual_BG[0].Real) / 2)) + r_dual_BG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_BG[1].Imaginary + ((Zr * IbG - Vb) / IbG).Imaginary + Zs_dual_BG[0].Imaginary) / 2)) + r_dual_BG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_BG"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_BG"].Points.AddXY(Zs_dual_BG[0].Real, Zs_dual_BG[0].Imaginary);
+                        chart2.Series["Zm_BG"].Points.AddXY(Zs_dual_BG[0].Real, Zs_dual_BG[0].Imaginary);
+                        chart2.Series["Zm_BG"].Points.AddXY(Zs_dual_BG[1].Real, Zs_dual_BG[1].Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[0].Real, Sop_BG[0].Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[1].Real, Sop_BG[1].Imaginary);
+
+                        //dual mho CG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_dual_CG = Vc + (k_pol * Vab);
+                        Complex Zpol_dual_CG = k_pol * Vab / IcG;
+                        Complex[] Zs_dual_CG = { -Zpol_dual_CG, Zm_CG[1] };
+                        double r_dual_CG = (Complex.Abs(Zr - Zs_dual_CG[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_CG[1].Real + ((Zr * IcG - Vc) / IcG).Real + Zs_dual_CG[0].Real) / 2)) + r_dual_CG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_CG[1].Imaginary + ((Zr * IbG - Vc) / IcG).Imaginary + Zs_dual_CG[0].Imaginary) / 2)) + r_dual_CG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_CG"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_CG"].Points.AddXY(Zs_dual_CG[0].Real, Zs_dual_CG[0].Imaginary);
+                        chart2.Series["Zm_CG"].Points.AddXY(Zs_dual_CG[0].Real, Zs_dual_CG[0].Imaginary);
+                        chart2.Series["Zm_CG"].Points.AddXY(Zs_dual_CG[1].Real, Zs_dual_CG[1].Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[0].Real, Sop_CG[0].Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[1].Real, Sop_CG[1].Imaginary);
+                    }
+                    break;
+                case 1: // Dual alternative
                     {
-                        double x = (((Zm_AG[1].Real + ((Zr * IaG - Va) / IaG).Real + Zs_dual_AG[0].Real) / 2)) + radius * Math.Cos(k * 2 * Math.PI / 1000);
-                        double y = (((Zm_AG[1].Imaginary + ((Zr * IaG - Va) / IaG).Imaginary + Zs_dual_AG[0].Imaginary) / 2)) + radius * Math.Sin(k * 2 * Math.PI / 1000);
-                        chart2.Series[0].Points.AddXY(x, y);
-                    }
-                    chart2.Series["Zs_AG"].Points.AddXY(0, 0);
-                    chart2.Series["Zs_AG"].Points.AddXY(Zs_dual_AG[0].Real, Zs_dual_AG[0].Imaginary);
-                    chart2.Series["Zm_AG"].Points.AddXY(Zs_dual_AG[0].Real, Zs_dual_AG[0].Imaginary);
-                    chart2.Series["Zm_AG"].Points.AddXY(Zs_dual_AG[1].Real, Zs_dual_AG[1].Imaginary);
-                    chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
-                    chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
+                        textBox21.Font = new Font(textBox20.Font, FontStyle.Strikeout);
+                        //dual mho AB                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-120 * Math.PI / 180), kpol_abs * Math.Sin(-120 * Math.PI / 180));
+                        Complex Sop_dual_alt_AB = Vab + (k_pol * Vca);
+                        Complex Zpol_dual_alt_AB = k_pol * Vca / Iab;
+                        Complex[] Zs_dual_alt_AB = { -Zpol_dual_alt_AB, Zm_AB[1] };
+                        double r_dual_alt_AB = (Complex.Abs(Zr - Zs_dual_alt_AB[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_AB[1].Real + ((Zr * Iab - Vab) / Iab).Real + Zs_dual_alt_AB[0].Real) / 2)) + r_dual_alt_AB * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_AB[1].Imaginary + ((Zr * Iab - Vab) / Iab).Imaginary + Zs_dual_alt_AB[0].Imaginary) / 2)) + r_dual_alt_AB * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AB"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_AB"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_AB"].Points.AddXY(Zs_dual_alt_AB[0].Real, Zs_dual_alt_AB[0].Imaginary);
+                        chart2.Series["Zm_AB"].Points.AddXY(Zs_dual_alt_AB[0].Real, Zs_dual_alt_AB[0].Imaginary);
+                        chart2.Series["Zm_AB"].Points.AddXY(Zs_dual_alt_AB[1].Real, Zs_dual_alt_AB[1].Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[0].Real, Sop_AB[0].Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[1].Real, Sop_AB[1].Imaginary);
 
+                        //dual mho BC                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-120 * Math.PI / 180), kpol_abs * Math.Sin(-120 * Math.PI / 180));
+                        Complex Sop_dual_alt_BC = Vbc + (k_pol * Vab);
+                        Complex Zpol_dual_alt_BC = k_pol * Vab / Ibc;
+                        Complex[] Zs_dual_alt_BC = { -Zpol_dual_alt_BC, Zm_BC[1] };
+                        double r_dual_alt_BC = (Complex.Abs(Zr - Zs_dual_alt_BC[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_BC[1].Real + ((Zr * Ibc - Vbc) / Ibc).Real + Zs_dual_alt_BC[0].Real) / 2)) + r_dual_alt_BC * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_BC[1].Imaginary + ((Zr * Ibc - Vbc) / Ibc).Imaginary + Zs_dual_alt_BC[0].Imaginary) / 2)) + r_dual_alt_BC * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BC"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_BC"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_BC"].Points.AddXY(Zs_dual_alt_BC[0].Real, Zs_dual_alt_BC[0].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_dual_alt_BC[0].Real, Zs_dual_alt_BC[0].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_dual_alt_BC[1].Real, Zs_dual_alt_BC[1].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+
+                        //dual mho CA                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-120 * Math.PI / 180), kpol_abs * Math.Sin(-120 * Math.PI / 180));
+                        Complex Sop_dual_alt_CA = Vca + (k_pol * Vbc);
+                        Complex Zpol_dual_alt_CA = k_pol * Vbc / Ica;
+                        Complex[] Zs_dual_alt_CA = { -Zpol_dual_alt_CA, Zm_CA[1] };
+                        double r_dual_alt_CA = (Complex.Abs(Zr - Zs_dual_alt_CA[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_CA[1].Real + ((Zr * Ica - Vca) / Ica).Real + Zs_dual_alt_CA[0].Real) / 2)) + r_dual_alt_CA * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_CA[1].Imaginary + ((Zr * Ica - Vca) / Ica).Imaginary + Zs_dual_alt_CA[0].Imaginary) / 2)) + r_dual_alt_CA * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CA"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_CA"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_CA"].Points.AddXY(Zs_dual_alt_CA[0].Real, Zs_dual_alt_CA[0].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zs_dual_alt_CA[0].Real, Zs_dual_alt_CA[0].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zs_dual_alt_CA[1].Real, Zs_dual_alt_CA[1].Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[0].Real, Sop_CA[0].Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[1].Real, Sop_CA[1].Imaginary);
+
+                        //dual mho AG
+                        k_pol = new Complex(kpol_abs * Math.Cos(120 * Math.PI / 180), kpol_abs * Math.Sin(120 * Math.PI / 180));
+                        Complex Sop_dual_alt_AG = Va + (k_pol * Vb);
+                        Complex Zpol_dual_alt_AG = k_pol * Vb / IaG;
+                        Complex[] Zs_dual_alt_AG = { -Zpol_dual_alt_AG, Zm_AG[1] };
+                        double r_dual_alt = (Complex.Abs(Zr - Zs_dual_alt_AG[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_AG[1].Real + ((Zr * IaG - Va) / IaG).Real + Zs_dual_alt_AG[0].Real) / 2)) + r_dual_alt * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_AG[1].Imaginary + ((Zr * IaG - Va) / IaG).Imaginary + Zs_dual_alt_AG[0].Imaginary) / 2)) + r_dual_alt * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_AG"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_AG"].Points.AddXY(Zs_dual_alt_AG[0].Real, Zs_dual_alt_AG[0].Imaginary);
+                        chart2.Series["Zm_AG"].Points.AddXY(Zs_dual_alt_AG[0].Real, Zs_dual_alt_AG[0].Imaginary);
+                        chart2.Series["Zm_AG"].Points.AddXY(Zs_dual_alt_AG[1].Real, Zs_dual_alt_AG[1].Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
+
+                        //dual mho BG
+                        k_pol = new Complex(kpol_abs * Math.Cos(120 * Math.PI / 180), kpol_abs * Math.Sin(120 * Math.PI / 180));
+                        Complex Sop_dual_alt_BG = Vb + (k_pol * Vc);
+                        Complex Zpol_dual_alt_BG = k_pol * Vc / IbG;
+                        Complex[] Zs_dual_alt_BG = { -Zpol_dual_alt_BG, Zm_BG[1] };
+                        double r_dual_alt_BG = (Complex.Abs(Zr - Zs_dual_alt_BG[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_BG[1].Real + ((Zr * IbG - Vb) / IbG).Real + Zs_dual_alt_BG[0].Real) / 2)) + r_dual_alt_BG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_BG[1].Imaginary + ((Zr * IbG - Vb) / IbG).Imaginary + Zs_dual_alt_BG[0].Imaginary) / 2)) + r_dual_alt_BG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_BG"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_BG"].Points.AddXY(Zs_dual_alt_BG[0].Real, Zs_dual_alt_BG[0].Imaginary);
+                        chart2.Series["Zm_BG"].Points.AddXY(Zs_dual_alt_BG[0].Real, Zs_dual_alt_BG[0].Imaginary);
+                        chart2.Series["Zm_BG"].Points.AddXY(Zs_dual_alt_BG[1].Real, Zs_dual_alt_BG[1].Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[0].Real, Sop_BG[0].Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[1].Real, Sop_BG[1].Imaginary);
+
+                        //dual mho CG
+                        k_pol = new Complex(kpol_abs * Math.Cos(120 * Math.PI / 180), kpol_abs * Math.Sin(120 * Math.PI / 180));
+                        Complex Sop_dual_alt_CG = Vc + (k_pol * Va);
+                        Complex Zpol_dual_alt_CG = k_pol * Va / IcG;
+                        Complex[] Zs_dual_alt_CG = { -Zpol_dual_alt_CG, Zm_CG[1] };
+                        double r_dual_alt_CG = (Complex.Abs(Zr - Zs_dual_alt_CG[0])) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zm_CG[1].Real + ((Zr * IcG - Vc) / IcG).Real + Zs_dual_alt_CG[0].Real) / 2)) + r_dual_alt_CG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zm_CG[1].Imaginary + ((Zr * IbG - Vc) / IcG).Imaginary + Zs_dual_alt_CG[0].Imaginary) / 2)) + r_dual_alt_CG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zs_CG"].Points.AddXY(0, 0);
+                        chart2.Series["Zs_CG"].Points.AddXY(Zs_dual_alt_CG[0].Real, Zs_dual_alt_CG[0].Imaginary);
+                        chart2.Series["Zm_CG"].Points.AddXY(Zs_dual_alt_CG[0].Real, Zs_dual_alt_CG[0].Imaginary);
+                        chart2.Series["Zm_CG"].Points.AddXY(Zs_dual_alt_CG[1].Real, Zs_dual_alt_CG[1].Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[0].Real, Sop_CG[0].Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[1].Real, Sop_CG[1].Imaginary);
+                    }
+                    break;
+                case 2: // Cross polarization
+                    {
+                        textBox21.Font = new Font(textBox20.Font, FontStyle.Strikeout);
+                        //cross mho AB                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_crz_AB = Vab + (k_pol * Vc);
+                        Complex Zpol_crz_AB = k_pol * Vc / Iab;
+                        Complex Zs_crz_AB = Zm_AB[1] - Zpol_crz_AB;
+                        double r_crz_AB = (Complex.Abs(-Zr + Zm_AB[1] - Zpol_crz_AB)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_AB[1] - Zpol_crz_AB).Real / 2)) + r_crz_AB * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_AB[1] - Zpol_crz_AB).Imaginary / 2)) + r_crz_AB * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AB"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_AB"].Points.AddXY(Zm_AB[1].Real, Zm_AB[1].Imaginary);
+                        chart2.Series["Zm_AB"].Points.AddXY(Zs_crz_AB.Real, Zs_crz_AB.Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[0].Real, Sop_AB[0].Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[1].Real, Sop_AB[1].Imaginary);
+
+                        //cross mho BC                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_crz_BC = Vbc + (k_pol * Va);
+                        Complex Zpol_crz_BC = k_pol * Va / Ibc;
+                        Complex Zs_crz_BC = Zm_BC[1] - Zpol_crz_BC;
+                        double r_crz_BC = (Complex.Abs(-Zr + Zm_BC[1] - Zpol_crz_BC)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_BC[1] - Zpol_crz_BC).Real / 2)) + r_crz_BC * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_BC[1] - Zpol_crz_BC).Imaginary / 2)) + r_crz_BC * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BC"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_BC"].Points.AddXY(Zm_BC[1].Real, Zm_BC[1].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_crz_BC.Real, Zs_crz_BC.Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+
+                        //cross mho CA
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_crz_CA = Vca + (k_pol * Vb);
+                        Complex Zpol_crz_CA = k_pol * Vb / Ibc;
+                        Complex Zs_crz_CA = Zm_BC[1] - Zpol_crz_BC;
+                        double r_crz_CA = (Complex.Abs(-Zr + Zm_BC[1] - Zpol_crz_BC)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_BC[1] - Zpol_crz_BC).Real / 2)) + r_crz_BC * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_BC[1] - Zpol_crz_BC).Imaginary / 2)) + r_crz_BC * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BC"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_BC"].Points.AddXY(Zm_BC[1].Real, Zm_BC[1].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_crz_BC.Real, Zs_crz_BC.Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+
+
+                        //Cross mho AG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_crz_AG = Va + (k_pol * Vbc);
+                        Complex Zpol_crz_AG = k_pol * Vbc / IaG;
+                        Complex Zs_crz_AG = Zm_AG[1] - Zpol_crz_AG;
+                        double r_crz_AG = (Complex.Abs(-Zr + Zm_AG[1] - Zpol_crz_AG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_AG[1] -Zpol_crz_AG).Real / 2)) + r_crz_AG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_AG[1] - Zpol_crz_AG).Imaginary / 2)) + r_crz_AG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_AG"].Points.AddXY(Zm_AG[1].Real, Zm_AG[1].Imaginary);
+                        chart2.Series["Zm_AG"].Points.AddXY(Zs_crz_AG.Real, Zs_crz_AG.Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
+                        //cross mho BG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_crz_BG = Vb + (k_pol * Vca);
+                        Complex Zpol_crz_BG = k_pol * Vca / IbG;
+                        Complex Zs_crz_BG = Zm_BG[1] - Zpol_crz_BG;
+                        double r_crz_BG = (Complex.Abs(-Zr + Zm_BG[1] - Zpol_crz_BG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_BG[1] - Zpol_crz_BG).Real / 2)) + r_crz_BG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_BG[1] - Zpol_crz_BG).Imaginary / 2)) + r_crz_BG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_BG"].Points.AddXY(Zm_BG[1].Real, Zm_BG[1].Imaginary);
+                        chart2.Series["Zm_BG"].Points.AddXY(Zs_crz_BG.Real, Zs_crz_BG.Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[0].Real, Sop_BG[0].Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[1].Real, Sop_BG[1].Imaginary);
+
+                        //cross mho CG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_crz_CG = Vc + (k_pol * Vab);
+                        Complex Zpol_crz_CG = k_pol * Vab / IcG;
+                        Complex Zs_crz_CG = Zm_CG[1] - Zpol_crz_CG;
+                        double r_crz_CG = (Complex.Abs(-Zr + Zm_CG[1] - Zpol_crz_CG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_CG[1] - Zpol_crz_CG).Real / 2)) + r_crz_CG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_CG[1] - Zpol_crz_CG).Imaginary / 2)) + r_crz_CG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_CG"].Points.AddXY(Zm_CG[1].Real, Zm_CG[1].Imaginary);
+                        chart2.Series["Zm_CG"].Points.AddXY(Zs_crz_CG.Real, Zs_crz_CG.Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[0].Real, Sop_CG[0].Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[1].Real, Sop_CG[1].Imaginary);
+                    }
+                    break;
+                case 3:// Cross polarization with voltage memory
+                    {
+
+                    }
+                    break;
+                case 4:// positive sequence
+                    {
+
+                    }
+                    break;
+                case 5:// positive sequence with voltage memory
+                    {
+
+                    }
+                    break;
             }
         }
         void loops_fault()
@@ -311,6 +670,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_AB"].Enabled = true;
                 chart2.Series["Zm_AB"].Enabled = true;
                 chart2.Series["Zs_AB"].Enabled = true;
+                chart2.Series["Mho_AB"].Enabled = true;
             }
             else
             {
@@ -319,6 +679,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_AB"].Enabled = false;
                 chart2.Series["Zm_AB"].Enabled = false;
                 chart2.Series["Zs_AB"].Enabled = false;
+                chart2.Series["Mho_AB"].Enabled = false;
             }
             //BC
             if (radioButton2.Checked == true)
@@ -328,6 +689,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_BC"].Enabled = true;
                 chart2.Series["Zm_BC"].Enabled = true;
                 chart2.Series["Zs_BC"].Enabled = true;
+                chart2.Series["Mho_BC"].Enabled = true;
             }
             else
             {
@@ -336,6 +698,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_BC"].Enabled = false;
                 chart2.Series["Zm_BC"].Enabled = false;
                 chart2.Series["Zs_BC"].Enabled = false;
+                chart2.Series["Mho_BC"].Enabled = false;
 
             }
             //CA
@@ -346,6 +709,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_CA"].Enabled = true;
                 chart2.Series["Zm_CA"].Enabled = true;
                 chart2.Series["Zs_CA"].Enabled = true;
+                chart2.Series["Mho_CA"].Enabled = true;
             }
             else
             {
@@ -354,6 +718,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_CA"].Enabled = false;
                 chart2.Series["Zm_CA"].Enabled = false;
                 chart2.Series["Zs_CA"].Enabled = false;
+                chart2.Series["Mho_CA"].Enabled = false;
             }
             //AG
             if (radioButton4.Checked == true)
@@ -363,6 +728,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_AG"].Enabled = true;
                 chart2.Series["Zm_AG"].Enabled = true;
                 chart2.Series["Zs_AG"].Enabled = true;
+                chart2.Series["Mho_AG"].Enabled = true;
             }
             else
             {
@@ -371,6 +737,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_AG"].Enabled = false;
                 chart2.Series["Zm_AG"].Enabled = false;
                 chart2.Series["Zs_AG"].Enabled = false;
+                chart2.Series["Mho_AG"].Enabled = false;
             }
             //BG
             if (radioButton5.Checked == true)
@@ -380,6 +747,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_BG"].Enabled = true;
                 chart2.Series["Zm_BG"].Enabled = true;
                 chart2.Series["Zs_BG"].Enabled = true;
+                chart2.Series["Mho_BG"].Enabled = true;
             }
             else
             {
@@ -388,6 +756,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_BG"].Enabled = false;
                 chart2.Series["Zm_BG"].Enabled = false;
                 chart2.Series["Zs_BG"].Enabled = false;
+                chart2.Series["Mho_BG"].Enabled = false;
             }
             //CG
             if (radioButton6.Checked == true)
@@ -397,6 +766,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_CG"].Enabled = true;
                 chart2.Series["Zm_CG"].Enabled = true;
                 chart2.Series["Zs_CG"].Enabled = true;
+                chart2.Series["Mho_CG"].Enabled = true;
             }
             else
             {
@@ -405,6 +775,7 @@ namespace Prot_Sistemas
                 chart2.Series["Zpol_CG"].Enabled = false;
                 chart2.Series["Zm_CG"].Enabled = false;
                 chart2.Series["Zs_CG"].Enabled = false;
+                chart2.Series["Mho_CG"].Enabled = false;
             }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -415,7 +786,9 @@ namespace Prot_Sistemas
         {
             loops_fault();
         }
-
-        
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            polarization_calc();
+        }
     }
 }
