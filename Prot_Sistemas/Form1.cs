@@ -200,6 +200,9 @@ namespace Prot_Sistemas
         Complex Ib = 0;
         Complex Ic = 0;
         Complex In = 0;
+        Complex Va_mem = 0;
+        Complex Vb_mem = 0;
+        Complex Vc_mem = 0;
         void polarization_calc()
         {
             for (int x = 0; x < 50; x++)
@@ -225,6 +228,12 @@ namespace Prot_Sistemas
             Va = new Complex(Convert.ToDouble(textBox2.Text) * Math.Cos(Convert.ToDouble(textBox3.Text) * Math.PI / 180), Convert.ToDouble(textBox2.Text) * Math.Sin(Convert.ToDouble(textBox3.Text) * Math.PI / 180))*1000;
             Vb = new Complex(Convert.ToDouble(textBox4.Text) * Math.Cos(Convert.ToDouble(textBox5.Text) * Math.PI / 180), Convert.ToDouble(textBox4.Text) * Math.Sin(Convert.ToDouble(textBox5.Text) * Math.PI / 180))*1000;
             Vc = new Complex(Convert.ToDouble(textBox6.Text) * Math.Cos(Convert.ToDouble(textBox7.Text) * Math.PI / 180), Convert.ToDouble(textBox6.Text) * Math.Sin(Convert.ToDouble(textBox7.Text) * Math.PI / 180)) * 1000;
+            Va_mem = new Complex(Convert.ToDouble(textBox14.Text) * Math.Cos(Convert.ToDouble(textBox15.Text) * Math.PI / 180), Convert.ToDouble(textBox14.Text) * Math.Sin(Convert.ToDouble(textBox15.Text) * Math.PI / 180)) * 1000;
+            Vb_mem = new Complex(Convert.ToDouble(textBox16.Text) * Math.Cos(Convert.ToDouble(textBox17.Text) * Math.PI / 180), Convert.ToDouble(textBox16.Text) * Math.Sin(Convert.ToDouble(textBox17.Text) * Math.PI / 180)) * 1000;
+            Vc_mem = new Complex(Convert.ToDouble(textBox18.Text) * Math.Cos(Convert.ToDouble(textBox19.Text) * Math.PI / 180), Convert.ToDouble(textBox18.Text) * Math.Sin(Convert.ToDouble(textBox19.Text) * Math.PI / 180)) * 1000;
+            Complex Vab_mem = Va_mem - Vb_mem;
+            Complex Vbc_mem = Vb_mem - Vc_mem;
+            Complex Vca_mem = Vc_mem - Va_mem;
             Complex Vab = Va - Vb;            
             Complex Vbc = Vb - Vc;
             Complex Vca = Vc - Va;
@@ -645,7 +654,23 @@ namespace Prot_Sistemas
                     break;
                 case 3:// Cross polarization with voltage memory
                     {
-
+                        textBox21.Font = textBox20.Font;
+                        //Cross with voltage memory mho AG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex V1_mem = (alpha * Vbc) + ((1 - alpha) * Vbc_mem);
+                        Complex Zpol_crz_mem_AG = k_pol * V1_mem / IaG;
+                        Complex Zs_crz_mem_AG = Zm_AG[1] - Zpol_crz_mem_AG;
+                        double r_crz_mem_AG = (Complex.Abs(-Zr + Zm_AG[1] - Zpol_crz_mem_AG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_AG[1] - Zpol_crz_mem_AG).Real / 2)) + r_crz_mem_AG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_AG[1] - Zpol_crz_mem_AG).Imaginary / 2)) + r_crz_mem_AG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_AG"].Points.AddXY(Zm_AG[1].Real, Zm_AG[1].Imaginary);
+                        chart2.Series["Zm_AG"].Points.AddXY(Zs_crz_mem_AG.Real, Zs_crz_mem_AG.Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
                     }
                     break;
                 case 4:// positive sequence
