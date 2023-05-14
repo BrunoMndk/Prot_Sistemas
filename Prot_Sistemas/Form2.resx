@@ -117,14 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="OpenProjectFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OpenProjectFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Run" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Run.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Circuitin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Circuitin2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        GaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgB
+        amSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBG
+        RpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSE
+        GaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgB
+        amSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBG
+        RpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSE
+        GaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgB
+        amSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBG
+        RpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSEGaBGRpgBamSE
+        GaBGRpgBamSEGaBGRpgBamSEGaDGZu7cuSPMACU2c//+/ZdRvnfv3vrQ4ZMBOL6XX5ydna0ePny4evHi
+        xfrmv08E4F1Y3fgfRBaM/6z+f8wAAAAASUVORK5CYII=
+</value>
   </data>
 </root>

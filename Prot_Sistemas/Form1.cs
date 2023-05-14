@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using System.Runtime.CompilerServices;
+using System.Drawing.Imaging;
 
 namespace Prot_Sistemas
 {
@@ -39,14 +40,15 @@ namespace Prot_Sistemas
             chart2.ChartAreas[0].AxisX.Minimum = -30;
             chart2.ChartAreas[0].AxisY.Maximum = 50;
             chart2.ChartAreas[0].AxisY.Minimum = -30;
-
+            
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {
-                polarization_calc();
+                polarization_calc();                
             }
+            
         }
         double mDown_x = double.NaN;
         double mDown_y = double.NaN;
@@ -814,6 +816,13 @@ namespace Prot_Sistemas
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             polarization_calc();
+            
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.ShowDialog();
         }
     }
 }
