@@ -40,7 +40,9 @@ namespace Prot_Sistemas
             chart2.ChartAreas[0].AxisX.Minimum = -30;
             chart2.ChartAreas[0].AxisY.Maximum = 50;
             chart2.ChartAreas[0].AxisY.Minimum = -30;
+
             
+
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -686,6 +688,8 @@ namespace Prot_Sistemas
                     }
                     break;
             }
+            chart1.ChartAreas[0].AxisY.Interval = chart1.ChartAreas[0].AxisX.Interval;
+            chart2.ChartAreas[0].AxisY.Interval = chart2.ChartAreas[0].AxisX.Interval;
         }
         void loops_fault()
         {
