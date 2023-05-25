@@ -14,11 +14,15 @@ using System.Windows.Forms.DataVisualization.Charting;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using System.Runtime.CompilerServices;
 using System.Drawing.Imaging;
+using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Prot_Sistemas
 {
     public partial class Form1 : Form
     {
+        public string[] analogic_A = new string[100];
+        public string[] analogic_V = new string[100];
         public Form1()
         {
             InitializeComponent();
@@ -192,10 +196,6 @@ namespace Prot_Sistemas
             {
                 e.Handled = true;
             }
-        }
-        void import()
-        {
-
         }
         Complex LT_Z1 = new Complex(0, 0);
         Complex LT_Z0 = new Complex(0, 0);
@@ -1132,11 +1132,427 @@ namespace Prot_Sistemas
             polarization_calc();
             
         }
+        double f_sist = 0;
+        double f_ams = 0;
+        int datagridlengh = 0;
+        string HT_VA;
+        string HT_VB;
+        string HT_VC;
+        string HT_IA;
+        string HT_IB;
+        string HT_IC;
+        double g_Zl1_re = 0;
+        double g_Zl0_re = 0;
+        double g_Zl1_im = 0;
+        double g_Zl0_im = 0;
+        double g_Leng_line = 0;
+        Complex g_LT1 = new Complex(0, 0);
+        double[] g_time = new double[10000];
+        double[] g_va = new double[10000];
+        double[] g_vb = new double[10000];
+        double[] g_vc = new double[10000];
+        double[] g_ia = new double[10000];
+        double[] g_ib = new double[10000];
+        double[] g_ic = new double[10000];
+        Complex[] g_za = new Complex[10000];
+        Complex[] g_zb = new Complex[10000];
+        Complex[] g_zc = new Complex[10000];
+        Complex[] g_zab = new Complex[10000];
+        Complex[] g_zbc = new Complex[10000];
+        Complex[] g_zca = new Complex[10000];
+        void import()
+        {
+            OpenFileDialog OF = new OpenFileDialog();
+            OF.Filter = "COMTRADE|*.cfg";
+            if (OF.ShowDialog() == DialogResult.OK)
+            {
+                dataGridView1.Rows.Clear();
+                dataGridView2.Rows.Clear();
+                dataGridView3.Rows.Clear();
+                string fn = OF.FileName;
+                string[] line = File.ReadAllLines(fn);
+                string[] contrade = new string[line.Length];
+                string CFGpath = Path.GetFullPath(fn);
+                int lenght = line.Length;
+                string[] entradas = new string[3];
 
+                int count = 0;
+                foreach (string str in line[1].Split('\t', ',', ';',' '))
+                    if (count < 3)
+                    {
+                        entradas[count] = str.Replace(@"A", "");
+                        count++;
+
+                    }
+                int AnalogLengh = Convert.ToInt32(entradas[1]) + 2;
+                int amostragemVET = Convert.ToInt32(entradas[0]) + 4;
+                int freqsistVET = Convert.ToInt32(entradas[0]) + 2;
+                dataGridView2.ColumnCount = lenght;
+                int j = 0;
+                foreach (string s1 in line)
+                {
+                    string[] linha = new string[lenght];
+                    int contagem = 0;
+                    if (s1 != "")
+                    {
+                        foreach (string coluna in s1.Split(',',' ','\t',';'))
+                            if (coluna != null)
+                            {
+                                linha[contagem] = coluna.Replace(".", ",");
+                                contagem++;
+                            }
+                        contrade[j] = linha[1];
+                        j++;
+                        dataGridView2.Rows.Add(linha);
+                    }
+                }
+                dataGridView1.ColumnCount = AnalogLengh;
+                dataGridView3.ColumnCount = AnalogLengh;
+                string[] nome = new string[AnalogLengh - 2];
+                for (int x = 2; x < AnalogLengh; x++)
+                {
+                    if (dataGridView2.Rows[x].Cells[1].Value.ToString() != null)
+                    {
+                        nome[x - 2] = dataGridView2.Rows[x].Cells[1].Value.ToString();
+                        dataGridView1.Columns[x].HeaderText = nome[x - 2].ToString();
+                    }
+                }
+                Form1.ActiveForm.Text = "Power Systems Analysis - " + CFGpath;
+                count = 0;
+                string DATpath = CFGpath.Replace(".CFG", ".DAT");
+                using (var DATreader = new StreamReader(DATpath))
+                {
+                    List<string> listA = new List<string>();
+                    List<string> listB = new List<string>();
+                    while (!DATreader.EndOfStream)
+                    {
+                        var lines = DATreader.ReadLine();
+                        var values = lines.Split(',');
+                        dataGridView1.Rows.Add(values);
+                        count++;
+                    }
+                }
+                string[] f1_rt_p = new string[100];
+                string[] f1_rt_s = new string[100];
+                string[] unidade = new string[100];
+                string unidade_V = "";
+                string unidade_A = "";
+                Form2 form2 = new Form2();
+                form2.Analogico_A_forms2 = analogic_A;
+                form2.Analogico_V_forms2 = analogic_V;
+                for (int x = 2; x < AnalogLengh; x++)
+                {
+                    if (dataGridView2.Rows[x].Cells[1].Value.ToString() != null)
+                    {
+                        unidade[x - 2] = dataGridView2.Rows[x].Cells[4].Value.ToString();
+                        if (unidade[x - 2] == "kA".ToString() || unidade[x - 2] == "A".ToString())
+                        {
+                            nome[x - 2] = dataGridView2.Rows[x].Cells[1].Value.ToString();
+                            analogic_A[x - 2] = nome[x - 2];
+                        }
+                        if (unidade[x - 2] == "kV".ToString() || unidade[x - 2] == "V".ToString())
+                        {
+                            nome[x - 2] = dataGridView2.Rows[x].Cells[1].Value.ToString();
+                            analogic_V[x - 2] = nome[x - 2];
+                        }
+                        if (dataGridView2.Rows[x].Cells[11].Value != null)
+                        {
+                            f1_rt_p[x - 2] = dataGridView2.Rows[x].Cells[10].Value.ToString();
+                            f1_rt_s[x - 2] = dataGridView2.Rows[x].Cells[11].Value.ToString();
+                        }
+                        else
+                        {
+                            f1_rt_p[x - 2] = 1.ToString();
+                            f1_rt_s[x - 2] = 1.ToString();
+                        }
+                        unidade[x - 2] = dataGridView2.Rows[x].Cells[4].Value.ToString();
+                    }
+
+
+                    if (unidade[x - 2] == "kA".ToString() || unidade[x - 2] == "A".ToString())
+                    {
+                        form2.RTC_P = Math.Round(Convert.ToDouble(f1_rt_p[x - 2]), 2).ToString();
+                        form2.RTC_S = Math.Round(Convert.ToDouble(f1_rt_s[x - 2]), 2).ToString();
+                        unidade_A = unidade[x - 2];
+                    }
+                    if (unidade[x - 2] == "kV".ToString() || unidade[x - 2] == "V".ToString())
+                    {
+                        form2.RTP_P = Math.Round(Convert.ToDouble(f1_rt_p[x - 2]), 2).ToString();
+                        form2.RTP_S = Math.Round(Convert.ToDouble(f1_rt_s[x - 2]), 2).ToString();
+                        unidade_V = unidade[x - 2];
+                    }
+                }
+                string Fase_A = 0.ToString();
+                string Fase_B = 0.ToString();
+                string Fase_C = 0.ToString();
+                string Corrente_A = 0.ToString();
+                string Corrente_B = 0.ToString();
+                string Corrente_C = 0.ToString();
+                double rtp = 0;
+                double rtc = 0;
+                if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Fase_A = form2.Tensao_VA;
+                    Fase_B = form2.Tensao_VB;
+                    Fase_C = form2.Tensao_VC;
+                    Corrente_A = form2.Corrente_IA;
+                    Corrente_B = form2.Corrente_IB;
+                    Corrente_C = form2.Corrente_IC;
+                    rtp = form2.F2_RTP;
+                    rtc = form2.F2_RTC;
+                    g_Leng_line = Convert.ToDouble(form2.Lengh_Line);
+                    g_Zl1_re = Convert.ToDouble(form2.ZL1_re) * g_Leng_line;
+                    g_Zl1_im = Convert.ToDouble(form2.ZL1_im) * g_Leng_line;
+                    g_Zl0_re = Convert.ToDouble(form2.ZL0_re) * g_Leng_line;
+                    g_Zl0_im = Convert.ToDouble(form2.ZL0_im) * g_Leng_line;
+
+                    string file = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TCC_DadosLinha.txt";
+                    using (StreamWriter bw = File.CreateText(file))
+                    {
+                        bw.Write("" + g_Leng_line);//0
+                        bw.Write("\r\n" + (form2.ZL1_re));//1
+                        bw.Write("\r\n" + form2.ZL1_im);//2
+                        bw.Write("\r\n" + form2.ZL0_re);//3
+                        bw.Write("\r\n" + form2.ZL0_im);
+                    }
+                }
+                g_LT1 = new Complex(g_Zl1_re, g_Zl1_im);
+                HT_VA = Fase_A;
+                HT_VB = Fase_B;
+                HT_VC = Fase_C;
+                HT_IA = Corrente_A;
+                HT_IB = Corrente_B;
+                HT_IC = Corrente_C;
+                double amostragem = 0;
+                double freqsist = 0;
+                for (int x = 0; x < dataGridView2.ColumnCount; x++)
+                {
+                    // freq sist
+                    if (x == freqsistVET)
+                    {
+                        freqsist = Convert.ToDouble(dataGridView2.Rows[x].Cells[0].Value);
+                    }
+                    // taxa de amostragem
+                    if (x == amostragemVET)
+                    {
+                        amostragem = Convert.ToDouble(dataGridView2.Rows[x].Cells[0].Value);
+                    }
+                }
+                double adder_tensao_va = 0;
+                double adder_tensao_vb = 0;
+                double adder_tensao_vc = 0;
+                double adder_corrente_ia = 0;
+                double adder_corrente_ib = 0;
+                double adder_corrente_ic = 0;
+                double multi_tensao_va = 0;
+                double multi_tensao_vb = 0;
+                double multi_tensao_vc = 0;
+                double multi_corrente_ia = 0;
+                double multi_corrente_ib = 0;
+                double multi_corrente_ic = 0;
+                for (int x = 0; x < dataGridView2.Rows.Count - 2; x++)
+                {
+                    if ((dataGridView2.Rows[x].Cells[1].Value != null) && (Fase_A == dataGridView2.Rows[x].Cells[1].Value.ToString()))
+                    {
+                        multi_tensao_va = Convert.ToDouble(dataGridView2.Rows[x].Cells[5].Value);
+                        adder_tensao_va = Convert.ToDouble(dataGridView2.Rows[x].Cells[6].Value);
+                    }
+                    if ((dataGridView2.Rows[x].Cells[1].Value != null) && (Fase_B == dataGridView2.Rows[x].Cells[1].Value.ToString()))
+                    {
+                        multi_tensao_vb = Convert.ToDouble(dataGridView2.Rows[x].Cells[5].Value);
+                        adder_tensao_vb = Convert.ToDouble(dataGridView2.Rows[x].Cells[6].Value);
+                    }
+                    if ((dataGridView2.Rows[x].Cells[1].Value != null) && (Fase_C == dataGridView2.Rows[x].Cells[1].Value.ToString()))
+                    {
+                        multi_tensao_vc = Convert.ToDouble(dataGridView2.Rows[x].Cells[5].Value);
+                        adder_tensao_vc = Convert.ToDouble(dataGridView2.Rows[x].Cells[6].Value);
+                    }
+                    if ((dataGridView2.Rows[x].Cells[1].Value != null) && (Corrente_A == dataGridView2.Rows[x].Cells[1].Value.ToString()))
+                    {
+                        multi_corrente_ia = Convert.ToDouble(dataGridView2.Rows[x].Cells[5].Value);
+                        adder_corrente_ia = Convert.ToDouble(dataGridView2.Rows[x].Cells[6].Value);
+                    }
+                    if ((dataGridView2.Rows[x].Cells[1].Value != null) && (Corrente_B == dataGridView2.Rows[x].Cells[1].Value.ToString()))
+                    {
+                        multi_corrente_ib = Convert.ToDouble(dataGridView2.Rows[x].Cells[5].Value);
+                        adder_corrente_ib = Convert.ToDouble(dataGridView2.Rows[x].Cells[6].Value);
+                    }
+                    if ((dataGridView2.Rows[x].Cells[1].Value != null) && (Corrente_C == dataGridView2.Rows[x].Cells[1].Value.ToString()))
+                    {
+                        multi_corrente_ic = Convert.ToDouble(dataGridView2.Rows[x].Cells[5].Value);
+                        adder_corrente_ic = Convert.ToDouble(dataGridView2.Rows[x].Cells[6].Value);
+                    }
+                }
+                f_sist = freqsist;
+                f_ams = amostragem;
+                chart3.Visible = true;
+                double time = 0;
+                double[] tempo = new double[dataGridView1.Rows.Count - 1];
+                double[] va = new double[dataGridView1.Rows.Count - 1];
+                double[] vb = new double[dataGridView1.Rows.Count - 1];
+                double[] vc = new double[dataGridView1.Rows.Count - 1];
+                double[] ia = new double[dataGridView1.Rows.Count - 1];
+                double[] ib = new double[dataGridView1.Rows.Count - 1];
+                double[] ic = new double[dataGridView1.Rows.Count - 1];
+                float[] VA_ = new float[dataGridView1.Rows.Count - 1];
+                double nf = 0;
+                g_time = new double[dataGridView1.Rows.Count - 1];
+                g_va = new double[dataGridView1.Rows.Count - 1];
+                g_vb = new double[dataGridView1.Rows.Count - 1];
+                g_vc = new double[dataGridView1.Rows.Count - 1];
+                g_ia = new double[dataGridView1.Rows.Count - 1];
+                g_ib = new double[dataGridView1.Rows.Count - 1];
+                g_ic = new double[dataGridView1.Rows.Count - 1];
+                datagridlengh = dataGridView1.Rows.Count;
+                toolStripLabel1.Text = "f: " + amostragem + " Hz";
+                toolStripLabel2.Text = "fn: " + freqsist + " Hz";
+                for (int x = 2; x < AnalogLengh; x++)
+                {
+                    if (dataGridView1.Columns[x].HeaderText == Fase_A)
+                    {
+                        chart3.Series[0].Name = "" + Fase_A;
+                        time = 0;
+                        for (int y = 0; y < dataGridView1.Rows.Count - 1; y++)
+                        {
+                            //series 1                            
+                            g_time[y] = Math.Round((1 / amostragem) + time, 6);
+                            nf = g_time[y];
+                            time = Math.Round((1 / amostragem) + time, 6);
+                            va[y] = Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * rtp;
+                            if (multi_tensao_va != 0)
+                            {
+                                va[y] = (Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * multi_tensao_va * rtp) + adder_tensao_va;
+                            }
+                            if (unidade_V == "kV".ToString())
+                            {
+                                va[y] = va[y] * 1000;
+                            }
+                            g_va[y] = va[y];
+                            VA_[y] = (float)va[y];
+                            chart3.Series[0].Points.AddXY(time, va[y]);
+                        }
+                    }
+                    if (dataGridView1.Columns[x].HeaderText == Fase_B)
+                    {
+                        chart3.Series[1].Name = "" + Fase_B;
+                        time = 0;
+                        for (int y = 0; y < dataGridView1.Rows.Count - 1; y++)
+                        {
+                            //series 1
+                            g_time[y] = Math.Round((1 / amostragem) + time, 6);
+                            time = Math.Round((1 / amostragem) + time, 6);
+                            vb[y] = Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * rtp;
+                            if (multi_tensao_va != 0)
+                            {
+                                vb[y] = (Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * multi_tensao_vb * rtp) + adder_tensao_vb;
+                            }
+                            if (unidade_V == "kV".ToString())
+                            {
+                                vb[y] = vb[y] * 1000;
+                            }
+                            g_vb[y] = vb[y];
+                            chart3.Series[1].Points.AddXY(time, vb[y]);
+                        }
+                    }
+                    if (dataGridView1.Columns[x].HeaderText == Fase_C)
+                    {
+                        chart3.Series[2].Name = "" + Fase_C;
+                        time = 0;
+                        for (int y = 0; y < dataGridView1.Rows.Count - 1; y++)
+                        {
+                            //series 1
+                            g_time[y] = Math.Round((1 / amostragem) + time, 6);
+                            time = Math.Round((1 / amostragem) + time, 6);
+                            vc[y] = Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * rtp;
+                            if (multi_tensao_va != 0)
+                            {
+                                vc[y] = (Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * multi_tensao_vc * rtp) + adder_tensao_vc;
+                            }
+                            if (unidade_V == "kV".ToString())
+                            {
+                                vc[y] = vc[y] * 1000;
+                            }
+                            g_vc[y] = vc[y];
+                            chart3.Series[2].Points.AddXY(time, vc[y]);
+                        }
+                    }
+                    if (dataGridView1.Columns[x].HeaderText == Corrente_A)
+                    {
+                        time = 0;
+                        chart3.Series[3].Name = "" + Corrente_A;
+                        //chart12.Series[0].Name = "" + Corrente_A + " RMS";
+                        for (int y = 0; y < dataGridView1.Rows.Count - 1; y++)
+                        {
+                            g_time[y] = Math.Round((1 / amostragem) + time, 6);
+                            time = Math.Round((1 / amostragem) + time, 6);
+                            ia[y] = Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value.ToString()) * rtc;
+                            if (multi_corrente_ia != 0)
+                            {
+                                ia[y] = (Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value.ToString()) * multi_corrente_ia * rtc) + adder_corrente_ia;
+                            }
+                            g_ia[y] = ia[y];
+                            chart3.Series[3].Points.AddXY(time, ia[y]);
+                        }
+                    }
+                    if (dataGridView1.Columns[x].HeaderText == Corrente_B)
+                    {
+                        time = 0;
+                        chart3.Series[4].Name = "" + Corrente_B;
+                        //chart12.Series[1].Name = "" + Corrente_B + " RMS";
+                        for (int y = 0; y < dataGridView1.Rows.Count - 1; y++)
+                        {
+                            g_time[y] = Math.Round((1 / amostragem) + time, 6);
+                            time = Math.Round((1 / amostragem) + time, 6);
+                            ib[y] = Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * rtc;
+                            if (multi_corrente_ia != 0)
+                            {
+                                ib[y] = (Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * multi_corrente_ib * rtc) + adder_corrente_ib;
+                            }
+                            g_ib[y] = ib[y];
+                            chart3.Series[4].Points.AddXY(time, ib[y]);
+                        }
+                    }
+                    if (dataGridView1.Columns[x].HeaderText == Corrente_C)
+                    {
+                        time = 0;
+                        chart3.Series[5].Name = "" + Corrente_C;
+                        //chart12.Series[2].Name = "" + Corrente_C + " RMS";
+                        for (int y = 0; y < dataGridView1.Rows.Count - 1; y++)
+                        {
+                            g_time[y] = Math.Round((1 / amostragem) + time, 6);
+                            time = Math.Round((1 / amostragem) + time, 6);
+                            ic[y] = Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * rtc;
+                            if (multi_corrente_ia != 0)
+                            {
+                                ic[y] = (Convert.ToDouble(dataGridView1.Rows[y].Cells[x].Value) * multi_corrente_ic * rtc) + adder_corrente_ic;
+                            }
+                            g_ic[y] = ic[y];
+                            chart3.Series[5].Points.AddXY(time, ic[y]);
+                        }
+                    }
+                }
+                dataGridView1.Rows.Clear();
+                int N = Convert.ToInt32(f_ams / f_sist);
+                for (int x = 0; x < g_time.Length; x++)
+                {
+                    dataGridView1.Rows.Add(g_time[x], va[x], vb[x], vc[x], ia[x], ib[x], ic[x]);
+                }
+                dataGridView1.Columns[0].HeaderText = "tempo";
+                dataGridView1.Columns[1].HeaderText = "Va";
+                dataGridView1.Columns[2].HeaderText = "Vb";
+                dataGridView1.Columns[3].HeaderText = "Vc";
+                dataGridView1.Columns[4].HeaderText = "Ia";
+                dataGridView1.Columns[5].HeaderText = "Ib";
+                dataGridView1.Columns[6].HeaderText = "Ic";
+            }
+        }
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            /*
             Form2 form2 = new Form2();
             form2.ShowDialog();
+            */
+            import();
         }
     }
 }
