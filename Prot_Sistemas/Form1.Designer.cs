@@ -290,6 +290,9 @@
             chartArea1.AxisY.MinorGrid.Enabled = true;
             chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisY.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            chartArea1.InnerPlotPosition.Auto = false;
+            chartArea1.InnerPlotPosition.Height = 100F;
+            chartArea1.InnerPlotPosition.Width = 100F;
             chartArea1.Name = "ChartArea1";
             chartArea1.Position.Auto = false;
             chartArea1.Position.Height = 100F;
@@ -525,6 +528,9 @@
             chartArea2.AxisY.MinorGrid.Enabled = true;
             chartArea2.AxisY.MinorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea2.AxisY.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            chartArea2.InnerPlotPosition.Auto = false;
+            chartArea2.InnerPlotPosition.Height = 100F;
+            chartArea2.InnerPlotPosition.Width = 100F;
             chartArea2.Name = "ChartArea1";
             chartArea2.Position.Auto = false;
             chartArea2.Position.Height = 100F;
