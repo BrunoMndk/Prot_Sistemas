@@ -193,7 +193,10 @@ namespace Prot_Sistemas
                 e.Handled = true;
             }
         }
+        void import()
+        {
 
+        }
         Complex LT_Z1 = new Complex(0, 0);
         Complex LT_Z0 = new Complex(0, 0);
         Complex k0 = 0;
@@ -589,20 +592,20 @@ namespace Prot_Sistemas
 
                         //cross mho CA
                         k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
-                        Complex Sop_crz_CA = Vca + (k_pol * Vb);
-                        Complex Zpol_crz_CA = k_pol * Vb / Ibc;
-                        Complex Zs_crz_CA = Zm_BC[1] - Zpol_crz_BC;
-                        double r_crz_CA = (Complex.Abs(-Zr + Zm_BC[1] - Zpol_crz_BC)) / 2;
+                        Complex Sop_crz_CA = (k_pol * Vb);
+                        Complex Zpol_crz_CA = k_pol * Vb / Ica;
+                        Complex Zs_crz_CA = Zm_CA[1] - Zpol_crz_CA;
+                        double r_crz_CA = (Complex.Abs(-Zr + Zm_CA[1] - Zpol_crz_CA)) / 2;
                         for (int k = 0; k <= 1000; k++)
                         {
-                            double x = (((Zr + Zm_BC[1] - Zpol_crz_BC).Real / 2)) + r_crz_BC * Math.Cos(k * 2 * Math.PI / 1000);
-                            double y = (((Zr + Zm_BC[1] - Zpol_crz_BC).Imaginary / 2)) + r_crz_BC * Math.Sin(k * 2 * Math.PI / 1000);
-                            chart2.Series["Mho_BC"].Points.AddXY(x, y);
+                            double x = (((Zr + Zm_CA[1] - Zpol_crz_CA).Real / 2)) + r_crz_CA * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_CA[1] - Zpol_crz_CA).Imaginary / 2)) + r_crz_CA * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CA"].Points.AddXY(x, y);
                         }
-                        chart2.Series["Zm_BC"].Points.AddXY(Zm_BC[1].Real, Zm_BC[1].Imaginary);
-                        chart2.Series["Zm_BC"].Points.AddXY(Zs_crz_BC.Real, Zs_crz_BC.Imaginary);
-                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
-                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zm_CA[1].Real, Zm_CA[1].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zs_crz_CA.Real, Zs_crz_CA.Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[0].Real, Sop_CA[0].Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[1].Real, Sop_CA[1].Imaginary);
 
 
                         //Cross mho AG
@@ -659,10 +662,58 @@ namespace Prot_Sistemas
                 case 3:// Cross polarization with voltage memory
                     {
                         textBox21.Font = textBox20.Font;
+                        //Cross with voltage memory mho AB
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex V1ab_mem = (alpha * Vb) + ((1 - alpha) * Vb_mem);
+                        Complex Zpol_crz_mem_AB = k_pol * V1ab_mem / Iab;
+                        Complex Zs_crz_mem_AB = Zm_AB[1] - Zpol_crz_mem_AB;
+                        double r_crz_mem_AB = (Complex.Abs(-Zr + Zm_AB[1] - Zpol_crz_mem_AB)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_AB[1] - Zpol_crz_mem_AB).Real / 2)) + r_crz_mem_AB * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_AB[1] - Zpol_crz_mem_AB).Imaginary / 2)) + r_crz_mem_AB * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AB"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_AB"].Points.AddXY(Zm_AB[1].Real, Zm_AB[1].Imaginary);
+                        chart2.Series["Zm_AB"].Points.AddXY(Zs_crz_mem_AB.Real, Zs_crz_mem_AB.Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[0].Real, Sop_AB[0].Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[1].Real, Sop_AB[1].Imaginary);
+                        //Cross with voltage memory mho BC
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex V1bc_mem = (alpha * Va) + ((1 - alpha) * Va_mem);
+                        Complex Zpol_crz_mem_BC = k_pol * V1bc_mem / Ibc;
+                        Complex Zs_crz_mem_BC = Zm_BC[1] - Zpol_crz_mem_BC;
+                        double r_crz_mem_BC = (Complex.Abs(-Zr + Zm_BC[1] - Zpol_crz_mem_BC)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_BC[1] - Zpol_crz_mem_BC).Real / 2)) + r_crz_mem_BC * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_BC[1] - Zpol_crz_mem_BC).Imaginary / 2)) + r_crz_mem_BC * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BC"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_BC"].Points.AddXY(Zm_BC[1].Real, Zm_BC[1].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_crz_mem_BC.Real, Zs_crz_mem_BC.Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+                        //Cross with voltage memory mho CA
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex V1ca_mem = (alpha * Vb) + ((1 - alpha) * Vb_mem);
+                        Complex Zpol_crz_mem_CA = k_pol * V1ca_mem / Ica;
+                        Complex Zs_crz_mem_CA = Zm_CA[1] - Zpol_crz_mem_CA;
+                        double r_crz_mem_CA = (Complex.Abs(-Zr + Zm_CA[1] - Zpol_crz_mem_CA)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_CA[1] - Zpol_crz_mem_CA).Real / 2)) + r_crz_mem_CA * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_CA[1] - Zpol_crz_mem_CA).Imaginary / 2)) + r_crz_mem_CA * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CA"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_CA"].Points.AddXY(Zm_CA[1].Real, Zm_CA[1].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zs_crz_mem_CA.Real, Zs_crz_mem_CA.Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[0].Real, Sop_CA[0].Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[1].Real, Sop_CA[1].Imaginary);
                         //Cross with voltage memory mho AG
                         k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
-                        Complex V1_mem = (alpha * Vbc) + ((1 - alpha) * Vbc_mem);
-                        Complex Zpol_crz_mem_AG = k_pol * V1_mem / IaG;
+                        Complex Vag_mem = (alpha * Vbc) + ((1 - alpha) * Vbc_mem);
+                        Complex Zpol_crz_mem_AG = k_pol * Vag_mem / IaG;
                         Complex Zs_crz_mem_AG = Zm_AG[1] - Zpol_crz_mem_AG;
                         double r_crz_mem_AG = (Complex.Abs(-Zr + Zm_AG[1] - Zpol_crz_mem_AG)) / 2;
                         for (int k = 0; k <= 1000; k++)
@@ -675,11 +726,144 @@ namespace Prot_Sistemas
                         chart2.Series["Zm_AG"].Points.AddXY(Zs_crz_mem_AG.Real, Zs_crz_mem_AG.Imaginary);
                         chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
                         chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
+                        //Cross with voltage memory mho BG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Vbg_mem = (alpha * Vca) + ((1 - alpha) * Vca_mem);
+                        Complex Zpol_crz_mem_BG = k_pol * Vbg_mem / IbG;
+                        Complex Zs_crz_mem_BG = Zm_BG[1] - Zpol_crz_mem_BG;
+                        double r_crz_mem_BG = (Complex.Abs(-Zr + Zm_BG[1] - Zpol_crz_mem_BG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_BG[1] - Zpol_crz_mem_BG).Real / 2)) + r_crz_mem_BG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_BG[1] - Zpol_crz_mem_BG).Imaginary / 2)) + r_crz_mem_BG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_BG"].Points.AddXY(Zm_BG[1].Real, Zm_BG[1].Imaginary);
+                        chart2.Series["Zm_BG"].Points.AddXY(Zs_crz_mem_BG.Real, Zs_crz_mem_BG.Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[0].Real, Sop_BG[0].Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[1].Real, Sop_BG[1].Imaginary);
+                        //Cross with voltage memory mho CG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Vcg_mem = (alpha * Vab) + ((1 - alpha) * Vab_mem);
+                        Complex Zpol_crz_mem_CG = k_pol * Vcg_mem / IcG;
+                        Complex Zs_crz_mem_CG = Zm_CG[1] - Zpol_crz_mem_CG;
+                        double r_crz_mem_CG = (Complex.Abs(-Zr + Zm_CG[1] - Zpol_crz_mem_CG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_CG[1] - Zpol_crz_mem_CG).Real / 2)) + r_crz_mem_CG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_CG[1] - Zpol_crz_mem_CG).Imaginary / 2)) + r_crz_mem_CG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_CG"].Points.AddXY(Zm_CG[1].Real, Zm_CG[1].Imaginary);
+                        chart2.Series["Zm_CG"].Points.AddXY(Zs_crz_mem_CG.Real, Zs_crz_mem_CG.Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[0].Real, Sop_CG[0].Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[1].Real, Sop_CG[1].Imaginary);
                     }
                     break;
                 case 4:// positive sequence
                     {
+                        textBox21.Font = new Font(textBox20.Font, FontStyle.Strikeout);
+                        //cross mho AB                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_pos_AB = Vab + (k_pol * Vc);
+                        Complex Zpol_crz_AB = k_pol * Vc / Iab;
+                        Complex Zs_crz_AB = Zm_AB[1] - Zpol_crz_AB;
+                        double r_crz_AB = (Complex.Abs(-Zr + Zm_AB[1] - Zpol_crz_AB)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_AB[1] - Zpol_crz_AB).Real / 2)) + r_crz_AB * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_AB[1] - Zpol_crz_AB).Imaginary / 2)) + r_crz_AB * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AB"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_AB"].Points.AddXY(Zm_AB[1].Real, Zm_AB[1].Imaginary);
+                        chart2.Series["Zm_AB"].Points.AddXY(Zs_crz_AB.Real, Zs_crz_AB.Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[0].Real, Sop_AB[0].Imaginary);
+                        chart2.Series["Zpol_AB"].Points.AddXY(Sop_AB[1].Real, Sop_AB[1].Imaginary);
 
+                        //cross mho BC                       
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_crz_BC = Vbc + (k_pol * Va);
+                        Complex Zpol_crz_BC = k_pol * Va / Ibc;
+                        Complex Zs_crz_BC = Zm_BC[1] - Zpol_crz_BC;
+                        double r_crz_BC = (Complex.Abs(-Zr + Zm_BC[1] - Zpol_crz_BC)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_BC[1] - Zpol_crz_BC).Real / 2)) + r_crz_BC * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_BC[1] - Zpol_crz_BC).Imaginary / 2)) + r_crz_BC * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BC"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_BC"].Points.AddXY(Zm_BC[1].Real, Zm_BC[1].Imaginary);
+                        chart2.Series["Zm_BC"].Points.AddXY(Zs_crz_BC.Real, Zs_crz_BC.Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[0].Real, Sop_BC[0].Imaginary);
+                        chart2.Series["Zpol_BC"].Points.AddXY(Sop_BC[1].Real, Sop_BC[1].Imaginary);
+
+                        //cross mho CA
+                        k_pol = new Complex(kpol_abs * Math.Cos(-90 * Math.PI / 180), kpol_abs * Math.Sin(-90 * Math.PI / 180));
+                        Complex Sop_crz_CA = (k_pol * Vb);
+                        Complex Zpol_crz_CA = k_pol * Vb / Ica;
+                        Complex Zs_crz_CA = Zm_CA[1] - Zpol_crz_CA;
+                        double r_crz_CA = (Complex.Abs(-Zr + Zm_CA[1] - Zpol_crz_CA)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_CA[1] - Zpol_crz_CA).Real / 2)) + r_crz_CA * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_CA[1] - Zpol_crz_CA).Imaginary / 2)) + r_crz_CA * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CA"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_CA"].Points.AddXY(Zm_CA[1].Real, Zm_CA[1].Imaginary);
+                        chart2.Series["Zm_CA"].Points.AddXY(Zs_crz_CA.Real, Zs_crz_CA.Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[0].Real, Sop_CA[0].Imaginary);
+                        chart2.Series["Zpol_CA"].Points.AddXY(Sop_CA[1].Real, Sop_CA[1].Imaginary);
+
+
+                        //Cross mho AG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_crz_AG = Va + (k_pol * Vbc);
+                        Complex Zpol_crz_AG = k_pol * Vbc / IaG;
+                        Complex Zs_crz_AG = Zm_AG[1] - Zpol_crz_AG;
+                        double r_crz_AG = (Complex.Abs(-Zr + Zm_AG[1] - Zpol_crz_AG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_AG[1] - Zpol_crz_AG).Real / 2)) + r_crz_AG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_AG[1] - Zpol_crz_AG).Imaginary / 2)) + r_crz_AG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_AG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_AG"].Points.AddXY(Zm_AG[1].Real, Zm_AG[1].Imaginary);
+                        chart2.Series["Zm_AG"].Points.AddXY(Zs_crz_AG.Real, Zs_crz_AG.Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[0].Real, Sop_AG[0].Imaginary);
+                        chart2.Series["Zpol_AG"].Points.AddXY(Sop_AG[1].Real, Sop_AG[1].Imaginary);
+                        //cross mho BG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_crz_BG = Vb + (k_pol * Vca);
+                        Complex Zpol_crz_BG = k_pol * Vca / IbG;
+                        Complex Zs_crz_BG = Zm_BG[1] - Zpol_crz_BG;
+                        double r_crz_BG = (Complex.Abs(-Zr + Zm_BG[1] - Zpol_crz_BG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_BG[1] - Zpol_crz_BG).Real / 2)) + r_crz_BG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_BG[1] - Zpol_crz_BG).Imaginary / 2)) + r_crz_BG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_BG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_BG"].Points.AddXY(Zm_BG[1].Real, Zm_BG[1].Imaginary);
+                        chart2.Series["Zm_BG"].Points.AddXY(Zs_crz_BG.Real, Zs_crz_BG.Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[0].Real, Sop_BG[0].Imaginary);
+                        chart2.Series["Zpol_BG"].Points.AddXY(Sop_BG[1].Real, Sop_BG[1].Imaginary);
+
+                        //cross mho CG
+                        k_pol = new Complex(kpol_abs * Math.Cos(90 * Math.PI / 180), kpol_abs * Math.Sin(90 * Math.PI / 180));
+                        Complex Sop_crz_CG = Vc + (k_pol * Vab);
+                        Complex Zpol_crz_CG = k_pol * Vab / IcG;
+                        Complex Zs_crz_CG = Zm_CG[1] - Zpol_crz_CG;
+                        double r_crz_CG = (Complex.Abs(-Zr + Zm_CG[1] - Zpol_crz_CG)) / 2;
+                        for (int k = 0; k <= 1000; k++)
+                        {
+                            double x = (((Zr + Zm_CG[1] - Zpol_crz_CG).Real / 2)) + r_crz_CG * Math.Cos(k * 2 * Math.PI / 1000);
+                            double y = (((Zr + Zm_CG[1] - Zpol_crz_CG).Imaginary / 2)) + r_crz_CG * Math.Sin(k * 2 * Math.PI / 1000);
+                            chart2.Series["Mho_CG"].Points.AddXY(x, y);
+                        }
+                        chart2.Series["Zm_CG"].Points.AddXY(Zm_CG[1].Real, Zm_CG[1].Imaginary);
+                        chart2.Series["Zm_CG"].Points.AddXY(Zs_crz_CG.Real, Zs_crz_CG.Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[0].Real, Sop_CG[0].Imaginary);
+                        chart2.Series["Zpol_CG"].Points.AddXY(Sop_CG[1].Real, Sop_CG[1].Imaginary);
                     }
                     break;
                 case 5:// positive sequence with voltage memory
