@@ -45,7 +45,6 @@ namespace Prot_Sistemas
             chart2.ChartAreas[0].AxisY.Maximum = 50;
             chart2.ChartAreas[0].AxisY.Minimum = -30;
 
-            
 
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
