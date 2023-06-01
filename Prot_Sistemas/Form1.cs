@@ -1196,7 +1196,7 @@ namespace Prot_Sistemas
                         int contagem = 0;
                         if (s1 != "")
                         {
-                            foreach (string coluna in s1.Split(',', ' ', '\t', ';'))
+                            foreach (string coluna in s1.Split(',', '\t', ';'))
                                 if (coluna != null)
                                 {
                                     linha[contagem] = coluna.Replace(".", ",");
@@ -1548,7 +1548,78 @@ namespace Prot_Sistemas
                 }
                 if(OF.FilterIndex == 2)
                 {
-                    MessageBox.Show("Not implemented");
+                    //MessageBox.Show("Not implemented");
+                    dataGridView1.Rows.Clear();
+                    dataGridView2.Rows.Clear();
+                    dataGridView3.Rows.Clear();
+                    string fn = OF.FileName;
+                    string[] line = File.ReadAllLines(fn);
+                    string[] contrade = new string[line.Length];
+                    string CFGpath = Path.GetFullPath(fn);
+                    int lenght = line.Length;
+                    string[] entradas = new string[3];
+
+                    int count = 0;
+                    
+                    int AnalogLengh = 6;
+                    int amostragemVET = Convert.ToInt32(entradas[0]) + 4;
+                    int freqsistVET = Convert.ToInt32(entradas[0]) + 2;
+                    dataGridView2.ColumnCount = lenght;
+                    
+                    int j = 0;
+                    foreach (string s1 in line)
+                    {
+                        string[] linha = new string[lenght];
+                        int contagem = 0;
+
+                        if ((s1 != ""))
+                        {                            
+                            foreach (string coluna in s1.Split(',', ' ', '\t', ';'))
+                            {                                
+                                if (coluna != null)
+                                {
+                                    linha[contagem] = coluna.Replace(".", ",");
+                                    contagem++;
+                                    
+                                }
+                            }
+                            contrade[j] = linha[1];
+                            j++;
+                            dataGridView2.Rows.Add(linha);
+                        }
+                    }
+                    
+                    dataGridView1.ColumnCount = AnalogLengh;
+                    dataGridView3.ColumnCount = AnalogLengh;
+                    string[] nome = new string[AnalogLengh];
+                    for (int x = 0; x < AnalogLengh; x++)
+                    {
+                        if (dataGridView2.Rows[0].Cells[x].Value.ToString() != null)
+                        {
+                            nome[x] = dataGridView2.Rows[x].Cells[1].Value.ToString();
+                            dataGridView2.Columns[x].HeaderText = nome[x].ToString();
+                        }
+                    }
+                    Form1.ActiveForm.Text = "Power Systems Analysis - " + CFGpath;
+                    count = 0;
+                    string DATpath = CFGpath.Replace(".CFG", ".DAT");
+                    using (var DATreader = new StreamReader(DATpath))
+                    {
+                        List<string> listA = new List<string>();
+                        List<string> listB = new List<string>();
+                        while (!DATreader.EndOfStream)
+                        {
+                            var lines = DATreader.ReadLine();
+                            var values = lines.Split(',');
+                            dataGridView1.Rows.Add(values);
+                            count++;
+                        }
+                    }
+                    string[] f1_rt_p = new string[100];
+                    string[] f1_rt_s = new string[100];
+                    string[] unidade = new string[100];
+                    string unidade_V = "";
+                    string unidade_A = "";
                 }
             }
         }
