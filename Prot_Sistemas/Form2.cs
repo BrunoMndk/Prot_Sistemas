@@ -28,7 +28,7 @@ namespace Prot_Sistemas
                     comboBox4.Items.Add(Analogico_A_forms2[x]);
                     comboBox5.Items.Add(Analogico_A_forms2[x]);
                     comboBox6.Items.Add(Analogico_A_forms2[x]);
-                    
+                    comboBox7.Items.Add(Analogico_A_forms2[x]);
                 }
                 if (Analogico_V_forms2[x] != null)
                 {
@@ -38,24 +38,45 @@ namespace Prot_Sistemas
                     
                 }
             }
-            comboBox4.SelectedItem = comboBox4.Items[0];
-            comboBox5.SelectedItem = comboBox5.Items[1];
-            comboBox6.SelectedItem = comboBox6.Items[2];
-            comboBox1.SelectedItem = comboBox1.Items[0];
-            comboBox2.SelectedItem = comboBox2.Items[1];
-            comboBox3.SelectedItem = comboBox3.Items[2];
+            
             textBox1.Text = "" + RTP_P;
             textBox2.Text = "" + RTP_S;
             textBox3.Text = "" + RTC_P;
             textBox4.Text = "" + RTC_S;
             RT();
+            if (import_fmt == "comtrade")
+            {
+                comboBox7.Visible = false;
+                comboBox7.Visible = false;
+                label9.Visible = false;
+                label10.Visible = false;
+
+                comboBox4.SelectedItem = comboBox4.Items[0];
+                comboBox5.SelectedItem = comboBox5.Items[1];
+                comboBox6.SelectedItem = comboBox6.Items[2];
+                comboBox1.SelectedItem = comboBox1.Items[0];
+                comboBox2.SelectedItem = comboBox2.Items[1];
+                comboBox3.SelectedItem = comboBox3.Items[2];
+            }
+            if (import_fmt == "ascii")
+            {
+                comboBox7.Visible = true;
+                label9.Visible = true;
+                comboBox7.SelectedItem = comboBox7.Items[0];
+                comboBox8.SelectedItem = comboBox8.Items[1];
+            }
         }
-        public double F2_RTP = 0;
-        public double F2_RTC = 0;
+        public double F2_RTP =1;
+        public double F2_RTC = 1;
         void RT()
         {
-            F2_RTP = Convert.ToDouble(textBox1.Text.ToString()) / Convert.ToDouble(textBox2.Text.ToString());
-            F2_RTC = Convert.ToDouble(textBox3.Text.ToString()) / Convert.ToDouble(textBox4.Text.ToString());
+            try
+            {
+                F2_RTP = Convert.ToDouble(textBox1.Text.ToString()) / Convert.ToDouble(textBox2.Text.ToString());
+                F2_RTC = Convert.ToDouble(textBox3.Text.ToString()) / Convert.ToDouble(textBox4.Text.ToString());
+            }
+            catch
+            { }
         }
         void draw_design()
         {
@@ -93,6 +114,9 @@ namespace Prot_Sistemas
         public string ZL0_re;
         public string ZL0_im;
         public string Lengh_Line;
+        public string g_time;
+        public string import_fmt;
+        public string g_fn;
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -122,6 +146,16 @@ namespace Prot_Sistemas
         private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
         {
             Corrente_IC = comboBox6.Text.ToString();
+        }
+
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            g_time = comboBox7.Text.ToString();
+        }
+
+        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            g_fn = comboBox8.Text.ToString();
         }
     }
 }
